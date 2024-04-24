@@ -1,0 +1,18 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>Index of /schema/mvc</title>
+<script nonce="20a9af60-c4b1-405b-aa31-241235babcad">try{(function(w,d){!function(kL,kM,kN,kO){kL[kN]=kL[kN]||{};kL[kN].executed=[];kL.zaraz={deferred:[],listeners:[]};kL.zaraz.q=[];kL.zaraz._f=function(kP){return async function(){var kQ=Array.prototype.slice.call(arguments);kL.zaraz.q.push({m:kP,a:kQ})}};for(const kR of["track","set","debug"])kL.zaraz[kR]=kL.zaraz._f(kR);kL.zaraz.init=()=>{var kS=kM.getElementsByTagName(kO)[0],kT=kM.createElement(kO),kU=kM.getElementsByTagName("title")[0];kU&&(kL[kN].t=kM.getElementsByTagName("title")[0].text);kL[kN].x=Math.random();kL[kN].w=kL.screen.width;kL[kN].h=kL.screen.height;kL[kN].j=kL.innerHeight;kL[kN].e=kL.innerWidth;kL[kN].l=kL.location.href;kL[kN].r=kM.referrer;kL[kN].k=kL.screen.colorDepth;kL[kN].n=kM.characterSet;kL[kN].o=(new Date).getTimezoneOffset();if(kL.dataLayer)for(const kY of Object.entries(Object.entries(dataLayer).reduce(((kZ,k$)=>({...kZ[1],...k$[1]})),{})))zaraz.set(kY[0],kY[1],{scope:"page"});kL[kN].q=[];for(;kL.zaraz.q.length;){const la=kL.zaraz.q.shift();kL[kN].q.push(la)}kT.defer=!0;for(const lb of[localStorage,sessionStorage])Object.keys(lb||{}).filter((ld=>ld.startsWith("_zaraz_"))).forEach((lc=>{try{kL[kN]["z_"+lc.slice(7)]=JSON.parse(lb.getItem(lc))}catch{kL[kN]["z_"+lc.slice(7)]=lb.getItem(lc)}}));kT.referrerPolicy="origin";kT.src="/cdn-cgi/zaraz/s.js?z="+btoa(encodeURIComponent(JSON.stringify(kL[kN])));kS.parentNode.insertBefore(kT,kS)};["complete","interactive"].includes(kM.readyState)?zaraz.init():kL.addEventListener("DOMContentLoaded",zaraz.init)}(w,d,"zarazData","script");})(window,document)}catch(e){throw fetch("/cdn-cgi/zaraz/t"),e;};</script></head>
+<body>
+<h1>Index of /schema/mvc</h1>
+<pre><img src="/icons/blank.gif" alt="Icon "> <a href="?C=N;O=D">Name</a>                    <a href="?C=M;O=A">Last modified</a>      <a href="?C=S;O=A">Size</a>  <a href="?C=D;O=A">Description</a><hr><img src="/icons/back.gif" alt="[PARENTDIR]"> <a href="/schema/">Parent Directory</a>                             -   
+<img src="/icons/text.gif" alt="[TXT]"> <a href="spring-mvc-3.0.xsd">spring-mvc-3.0.xsd</a>      2020-09-15 10:35  9.4K  
+<img src="/icons/text.gif" alt="[TXT]"> <a href="spring-mvc-3.1.xsd">spring-mvc-3.1.xsd</a>      2020-09-15 10:35   15K  
+<img src="/icons/text.gif" alt="[TXT]"> <a href="spring-mvc-3.2.xsd">spring-mvc-3.2.xsd</a>      2020-09-15 10:35   23K  
+<img src="/icons/text.gif" alt="[TXT]"> <a href="spring-mvc-4.0.xsd">spring-mvc-4.0.xsd</a>      2020-09-15 10:35   24K  
+<img src="/icons/text.gif" alt="[TXT]"> <a href="spring-mvc-4.1.xsd">spring-mvc-4.1.xsd</a>      2020-09-15 10:35   47K  
+<img src="/icons/text.gif" alt="[TXT]"> <a href="spring-mvc-4.2.xsd">spring-mvc-4.2.xsd</a>      2020-09-15 10:35   57K  
+<img src="/icons/text.gif" alt="[TXT]"> <a href="spring-mvc-4.3.xsd">spring-mvc-4.3.xsd</a>      2020-09-15 10:35   58K  
+<img src="/icons/text.gif" alt="[TXT]"> <a href="spring-mvc.xsd">spring-mvc.xsd</a>          2020-09-15 10:35   58K  
+<hr></pre>
+<script>if (window.parent == window) {(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o), m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');ga('create', 'UA-2728886-2', 'auto', {'siteSpeedSampleRate': 100});ga('send', 'pageview');}</script></body></html>
