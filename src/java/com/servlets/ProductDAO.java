@@ -4,10 +4,13 @@
  */
 package com.servlets;
 
+import com.models.Product;
+import java.util.List;
+
 /**
  *
  * @author asus
  */
 public interface ProductDAO {
-    
+    public List<Product> findAll();
 }
