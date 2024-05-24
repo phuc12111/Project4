@@ -25,14 +25,14 @@
         <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
 
         <!-- BASE CSS -->
-        <link href="css/bootstrap.min.css" rel="stylesheet">
-        <link href="css/style.css" rel="stylesheet">
+        <link href="${pageContext.request.contextPath}/css/bootstrap.min.css" rel="stylesheet">
+        <link href="${pageContext.request.contextPath}/css/style.css" rel="stylesheet">
 
         <!-- SPECIFIC CSS -->
-        <link href="css/home_1.css" rel="stylesheet">
+        <link href="${pageContext.request.contextPath}/css/home_1.css" rel="stylesheet">
 
         <!-- YOUR CUSTOM CSS -->
-        <link href="css/custom.css" rel="stylesheet">
+        <link href="${pageContext.request.contextPath}/css/custom.css" rel="stylesheet">
 
     </head>
 
@@ -148,7 +148,7 @@
                                     <figure>
                                         <span class="ribbon off">-30%</span>
                                         <a href="product-detail-1.html">
-                                            <img class="img-fluid lazy" src="${pro.picture}" data-src="${pro.picture}" alt="">
+                                            <img class="img-fluid lazy" src="${pageContext.request.contextPath}/${pro.picture}" data-src="${pageContext.request.contextPath}/${pro.picture}" alt="">
                                         </a>
                                         <div data-countdown="2019/05/15" class="countdown"></div>
                                     </figure>
@@ -169,7 +169,7 @@
                                     <ul>
                                         <li><a href="#0" class="tooltip-1" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to favorites"><i class="ti-heart"></i><span>Add to favorites</span></a></li>
                                         <li><a href="#0" class="tooltip-1" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to compare"><i class="ti-control-shuffle"></i><span>Add to compare</span></a></li>
-                                        <li><a href="#0" class="tooltip-1" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to cart"><i class="ti-shopping-cart"></i><span>Add to cart</span></a></li>
+                                        <li><a href="cart/add/${pro.productID}.htm" class="tooltip-1" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to cart"><i class="ti-shopping-cart"></i><span>Add to cart</span></a></li>
                                     </ul>
                                 </div>
                                 <!-- /grid_item -->

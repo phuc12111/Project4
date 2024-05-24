@@ -21,7 +21,7 @@ public class ProductDAOiml implements ProductDAO {
     
     @Override
     public List<Product> findAll() {
-        String sql = "select * from products";
+        String sql = "SELECT * FROM products";
         List<Product> pro = new ArrayList<>();
         List<Map<String, Object>> rows = jdbcTemplate.queryForList(sql);
 

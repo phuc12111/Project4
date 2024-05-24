@@ -26,5 +26,10 @@
     <bean id="pdao" class="com.servlets.ProductDAOiml">
         <property name="jdbcTemplate" ref="jdbcTemplate"></property>
     </bean>
-
+    <bean id="cdao" class="com.servlets.CartDAOiml">
+        <property name="jdbcTemplate" ref="jdbcTemplate"></property>
+    </bean>
+    <bean id="ldao" class="com.servlets.LoginDAOiml">
+        <property name="jdbcTemplate" ref="jdbcTemplate"></property>
+    </bean>
 </beans>
