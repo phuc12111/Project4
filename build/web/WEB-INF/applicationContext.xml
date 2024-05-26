@@ -41,5 +41,11 @@
     <bean id="fdao" class="com.servlets.FavouritesDAOiml">
         <property name="jdbcTemplate" ref="jdbcTemplate"></property>
     </bean>
+    <bean id="fbpdao" class="com.servlets.FeedbackPageDAOImpl">
+        <property name="jdbcTemplate" ref="jdbcTemplate"></property>
+    </bean>
+    <bean id="albumdao" class="com.servlets.AlbumsDAOImpl">
+        <property name="jdbcTemplate" ref="jdbcTemplate"></property>
+    </bean>
     
 </beans>

@@ -24,18 +24,21 @@
                             <a href="#" class="open_close" id="close_in"><i class="ti-close"></i></a>
                         </div>
                         <ul>
-                            <li class="submenu">
-                                <a href="${pageContext.request.contextPath}/index.htm" class="show-submenu">Home</a>
-                                <ul>
+                            <li>
+                                <a href="${pageContext.request.contextPath}/index.htm">Home</a>
+                            </li>
+                            <li>
+                                <a href="${pageContext.request.contextPath}/list/showAlbum.htm" class="show-submenu">Albums</a>
+<!--                                <ul>
                                     <li><a href="index.html">Slider</a></li>
                                     <li><a href="index-2.html">Video Background</a></li>
                                     <li><a href="index-3.html">Vertical Slider</a></li>
                                     <li><a href="index-4.html">GDPR Cookie Bar</a></li>
-                                </ul>
+                                </ul>-->
                             </li>
-                            <li class="megamenu submenu">
-                                <a href="javascript:void(0);" class="show-submenu-mega">Pages</a>
-                                <div class="menu-wrapper">
+                            <li>
+                                <a href="${pageContext.request.contextPath}/index.htm" class="show-submenu-mega">News</a>
+<!--                                <div class="menu-wrapper">
                                     <div class="row small-gutters">
                                         <div class="col-lg-3">
                                             <h3>Listing grid</h3>
@@ -82,13 +85,13 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <!-- /row -->
-                                </div>
+                                     /row 
+                                </div>-->
                                 <!-- /menu-wrapper -->
                             </li>
-                            <li class="submenu">
-                                <a href="javascript:void(0);" class="show-submenu">Extra Pages</a>
-                                <ul>
+                            <li>
+                                <a href="${pageContext.request.contextPath}/index.htm" class="show-submenu">About Us</a>
+<!--                                <ul>
                                     <li><a href="header-2.html">Header Style 2</a></li>
                                     <li><a href="header-3.html">Header Style 3</a></li>
                                     <li><a href="header-4.html">Header Style 4</a></li>
@@ -100,13 +103,10 @@
                                     <li><a href="about-2.html">About 2</a></li>
                                     <li><a href="modal-advertise.html">Modal Advertise</a></li>
                                     <li><a href="modal-newsletter.html">Modal Newsletter</a></li>
-                                </ul>
+                                </ul>-->
                             </li>
                             <li>
-                                <a href="blog.html">Blog</a>
-                            </li>
-                            <li>
-                                <a href="#0">Buy Template</a>
+                                <a href="${pageContext.request.contextPath}/index.htm">Contacts</a>
                             </li>
                         </ul>
                     </div>

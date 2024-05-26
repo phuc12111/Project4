@@ -173,12 +173,8 @@
                                             </a>
                                         </li>
                                         <li>
-                                            <form id="favouritesForm" action="/favourites/add" method="post" style="display:none;">
-                                                <input type="hidden" name="productID" value="${pro.productID}" />
-                                                <input type="hidden" name="phone" value="${login.phone}" />
-                                            </form>
-                                            <a href="#0" class="tooltip-1" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to favourites" onclick="document.getElementById('favouritesForm').submit();">
-                                                <i class="ti-control-shuffle"></i><span>Add to favourites</span>
+                                            <a href="${pageContext.request.contextPath}/list/addAlbum/${pro.productID}.htm" class="tooltip-1" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to albums">
+                                                <i class="ti-save-alt"></i><span>Add to albums</span>
                                             </a>
                                         </li>
                                         <li>
