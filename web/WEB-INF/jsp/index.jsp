@@ -168,8 +168,10 @@
                                     </div>
                                     <ul>
                                         <li>
-                                            <a href="${pageContext.request.contextPath}/favourites/add/${pro.productID}/${login.phone}.htm" class="tooltip-1" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to favorites">
-                                                <i class="ti-heart"></i><span>Add to favorites</span>
+                                            <a href="${pageContext.request.contextPath}/favourites/add/${pro.productID}/${login.phone}.htm"  class="tooltip-1" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to favorites">
+                                                <i class="ti-heart" style="
+                                                   justify-content: center;
+                                                   align-items: center;"></i><span>Add to favorites</span>
                                             </a>
                                         </li>
                                         <li>

@@ -4,15 +4,14 @@
  */
 package com.servlets;
 
-import com.models.Favourites;
+import com.models.Categories;
 import java.util.List;
+
 
 /**
  *
  * @author asus
  */
-public interface FavouritesDAO {
-    public void createFavourites(Favourites favourites);
-    public List<Favourites> selectFavourites(String phone);
-    public void deleteFavourites(String phone, int productID);
+public interface CategoryDAO {
+    public List<Categories> findAll();
 }

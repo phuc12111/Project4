@@ -50,43 +50,63 @@
                             <ul>
                                 <li><a href="#">Home</a></li>
                                 <li><a href="#">Category</a></li>
-                                <li>Favourites</li>
+                                <li>My order</li>
                             </ul>
                         </div>
-                        <h1>Favourite Products</h1>
+                        <h1>My order</h1>
                     </div>
                     <h1>${successfully}</h1>
                     <c:choose>
-                        <c:when test="${not empty message}">
-                            <h1>${message}</h1>
+                        <c:when test="${not empty ordererror}">
+                            <h1>${ordererror}</h1>
                         </c:when>
                         <c:otherwise>  
                             <table class="table table-striped cart-list">
                                 <thead>
                                     <tr>
                                         <th>Product</th>
-                                        <th>Price</th>
-                                        <th>picture</th>
-                                        
+                                        <th>deliveryDate</th>
+                                        <th>shipAddress</th>
+                                        <th>status</th>
+                                        <th>deliveryName</th>
+                                        <th>price</th>
+                                        <th>quantity</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <c:forEach var="fa" items="${favouritesList}">
+                                    <c:forEach var="order" items="${orderDetails}">
                                         <tr>
                                             <td>
                                                 <div class="thumb_cart">
-                                                    <img src="${pageContext.request.contextPath}/${fa.picture}" data-src="${pageContext.request.contextPath}/${fa.picture}" class="lazy" alt="Image">
+                                                    <img src="${pageContext.request.contextPath}/${order.picture}" data-src="${pageContext.request.contextPath}/${order.picture}" class="lazy" alt="Image">
                                                 </div>
-                                                <span class="item_cart">${fa.productName}</span>
+                                                <span class="item_cart">${order.productName}</span>
                                             </td>
                                             <td>
-                                                <strong>${fa.price}</strong>
+                                                <strong>${order.deliveryDate}</strong>
                                             </td>
                                             <td>
-                                                <strong>${fa.picture}</strong>
+                                                <strong>${order.shipAddress}</strong>
                                             </td>
                                             <td>
-                                                <a href="${pageContext.request.contextPath}/favourites/delete/${login.phone}/${fa.productID}.htm"><i class="ti-trash"></i></a>
+                                                <strong>${order.status}</strong>
+                                            </td>
+                                            <td>
+                                                <strong>${order.deliveryName}</strong>
+                                            </td>
+                                            <td>
+                                                <strong>${order.price}</strong>
+                                            </td>
+                                            <td>
+                                                <strong>${order.quantity}</strong>
+                                            </td>
+                                            <td>
+                                                <c:if test="${order.shipAddress == 'HCM'}">
+                                                    <form>
+                                                        <button type="submit">danh gia</button>
+                                                    </form>
+                                                </c:if>
+
                                             </td>
                                         </tr>
                                     </c:forEach>

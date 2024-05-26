@@ -40,4 +40,11 @@ public class FavouritesDAOiml implements FavouritesDAO {
             return new ArrayList<>(); // Return an empty list if no results found
         }
     }
+    
+    
+     @Override
+    public void deleteFavourites(String phone, int productID) {
+        String sql = "DELETE FROM favourites WHERE phone = ? and productID = ?";
+        jdbcTemplate.update(sql, phone, productID);
+    }
 }

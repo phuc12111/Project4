@@ -36,5 +36,15 @@ public class LoginDAOiml implements LoginDAO {
         String sql = "SELECT * FROM members WHERE phone = ?";
         return jdbcTemplate.queryForObject(sql, new Object[]{phone}, new BeanPropertyRowMapper<>(Login.class));
     }
+    
+    @Override
+    public Login findPhone(String phone) {
+    try {
+        return jdbcTemplate.queryForObject("SELECT * FROM members WHERE phone = ?", new Object[]{phone}, new BeanPropertyRowMapper<>(Login.class));
+    } catch (EmptyResultDataAccessException e) {
+        return null; // Return null if no user is found
+    }
+}
+
 }
 

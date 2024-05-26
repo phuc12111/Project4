@@ -41,5 +41,7 @@
     <bean id="fdao" class="com.servlets.FavouritesDAOiml">
         <property name="jdbcTemplate" ref="jdbcTemplate"></property>
     </bean>
-    
+    <bean id="viodao" class="com.servlets.ViewOrderDAOiml">
+        <property name="jdbcTemplate" ref="jdbcTemplate"></property>
+    </bean>
 </beans>

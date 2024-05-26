@@ -3,6 +3,7 @@ package com.controllers;
 
 
 import com.models.Cart;
+import com.servlets.CategoryDAO;
 import com.servlets.ProductDAO;
 import java.util.HashMap;
 import java.util.List;
@@ -23,12 +24,22 @@ public class Index {
     @Autowired
     private ProductDAO productDAO;
     
+    @Autowired
+    private CategoryDAO categoryDAO;
+    
     
     @RequestMapping(value = "index", method = RequestMethod.GET)
     public String showShipper(ModelMap model) {
         List<com.models.Product> listPro = productDAO.findAll();
         model.addAttribute("listPro", listPro);
+        
+        List<com.models.Categories> cate = categoryDAO.findAll();
+        model.addAttribute("cate", cate);
         return "index";
     }
+    
+
+    
+    
     
 }

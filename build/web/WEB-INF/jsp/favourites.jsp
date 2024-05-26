@@ -55,30 +55,46 @@
                         </div>
                         <h1>Favourite Products</h1>
                     </div>
-                    <!-- /page_header -->
-                    <table class="table table-striped cart-list">
-                        <thead>
-                            <tr>
-                                <th>Product</th>
-                                <th>Price</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <c:forEach var="fa" items="${favouritesList}">
-                                <tr>
-                                    <td>
-                                        <div class="thumb_cart">
-                                            <img src="${pageContext.request.contextPath}/${fa.picture}" data-src="${pageContext.request.contextPath}/${fa.picture}" class="lazy" alt="Image">
-                                        </div>
-                                        <span class="item_cart">${fa.productName}</span>
-                                    </td>
-                                    <td>
-                                        <strong>${fa.price}</strong>
-                                    </td>
-                                </tr>
-                            </c:forEach>
-                        </tbody>
-                    </table>
+                    <h1>${successfully}</h1>
+                    <c:choose>
+                        <c:when test="${not empty message}">
+                            <h1>${message}</h1>
+                        </c:when>
+                        <c:otherwise>  
+                            <table class="table table-striped cart-list">
+                                <thead>
+                                    <tr>
+                                        <th>Product</th>
+                                        <th>Price</th>
+                                        <th>picture</th>
+                                        
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <c:forEach var="fa" items="${favouritesList}">
+                                        <tr>
+                                            <td>
+                                                <div class="thumb_cart">
+                                                    <img src="${pageContext.request.contextPath}/${fa.picture}" data-src="${pageContext.request.contextPath}/${fa.picture}" class="lazy" alt="Image">
+                                                </div>
+                                                <span class="item_cart">${fa.productName}</span>
+                                            </td>
+                                            <td>
+                                                <strong>${fa.price}</strong>
+                                            </td>
+                                            <td>
+                                                <strong>${fa.picture}</strong>
+                                            </td>
+                                            <td>
+                                                <a href="${pageContext.request.contextPath}/favourites/delete/${login.phone}/${fa.productID}.htm"><i class="ti-trash"></i></a>
+                                            </td>
+                                        </tr>
+                                    </c:forEach>
+                                </tbody>
+                            </table>
+                        </c:otherwise>
+                    </c:choose>
+
                     <div class="col-sm-4 text-end">
                     </div>
                 </div>
@@ -94,7 +110,7 @@
         <div id="toTop"></div><!-- Back to top button -->
 
         <!-- COMMON SCRIPTS -->
-        <script src="js/common_scripts.min.js"></script>
-        <script src="js/main.js"></script>
+        <script src="${pageContext.request.contextPath}/js/common_scripts.min.js"></script>
+        <script src="${pageContext.request.contextPath}/js/main.js"></script>
     </body>
 </html>

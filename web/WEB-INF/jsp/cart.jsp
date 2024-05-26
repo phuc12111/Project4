@@ -109,22 +109,34 @@
                             </c:forEach>
                         </tbody>
                     </table>
-                    <div class="col-sm-4 text-end">
 
 
 
+                    <div class="row add_top_30 flex-sm-row-reverse cart_actions">
+                        <div class="col-sm-4 text-end">
+                            <button type="button" class="btn_1 gray"><a href="${pageContext.request.contextPath}/cart/clearCart.htm">Clean cart</a></button> 
+                        </div>
+                        <div class="col-sm-8">
+                            <div class="apply-coupon">
+                                <div class="form-group">
+                                    <div class="row g-2">
+                                        <form action="${pageContext.request.contextPath}/cart/cartship.htm" method="post">
+                                            <label for="shipperName">Chọn đối tác vận chuyển:</label>
+                                            <select id="shipperName" name="shipperName" onchange="updateShippingCost()">
+                                                <c:forEach var="de" items="${listde}">
+                                                    <option value="${de.getShipperName()}">${de.getShipperName()}</option>
+                                                </c:forEach>
+                                            </select>
+                                             <input type="submit" value="Submit">
+                                        </form>
 
-                        <form action="${pageContext.request.contextPath}/cart/cartship.htm" method="post">
-                            <label for="shipperName">Chọn đối tác vận chuyển:</label>
-                            <select id="shipperName" name="shipperName" onchange="updateShippingCost()">
-                                <c:forEach var="de" items="${listde}">
-                                    <option value="${de.getShipperName()}">${de.getShipperName()}</option>
-                                </c:forEach>
-                            </select>
-                            <input type="submit" value="Chọn">
-                        </form>
-                        <button type="button" class="btn_1 gray"><a href="${pageContext.request.contextPath}/cart/clearCart.htm">Clean cart</a></button> 
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+
+
                     <div class="box_cart">
                         <div class="container">
                             <div class="row justify-content-end">
@@ -167,9 +179,7 @@
                         <div class="col-md-6">
                             <input type="text" name="shipAddress" value="${login.address}" class="form-control">
                         </div>
-
-                        <input type="text" name="phone" value="${login.phone}" class="form-control" placeholder="Phone">
-
+                        <br>
                         <button type="submit" class="btn_1 full-width cart">check out </button>
 
                     </form>

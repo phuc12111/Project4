@@ -139,7 +139,7 @@
                                 </span>
                                 <div id="menu">
                                     <ul>
-                                        <li><span><a href="#0">Collections</a></span>
+                                        <li><span><a href="#0">Game DVD</a></span>
                                             <ul>
                                                 <li><a href="listing-grid-1-full.html">Trending</a></li>
                                                 <li><a href="listing-grid-2-full.html">Life style</a></li>
@@ -148,7 +148,7 @@
                                                 <li><a href="listing-grid-5-sidebar-right.html">View all Collections</a></li>
                                             </ul>
                                         </li>
-                                        <li><span><a href="#">Men</a></span>
+                                        <li><span><a href="#">Music DVD</a></span>
                                             <ul>
                                                 <li><a href="listing-grid-6-sidebar-left.html">Offers</a></li>
                                                 <li><a href="listing-grid-7-sidebar-right.html">Shoes</a></li>
@@ -157,7 +157,7 @@
                                                 <li><a href="listing-row-4-sidebar-extended.html">Equipment</a></li>
                                             </ul>
                                         </li>
-                                        <li><span><a href="#">Women</a></span>
+                                        <li><span><a href="#">Film DVD</a></span>
                                             <ul>
                                                 <li><a href="listing-grid-1-full.html">Best Sellers</a></li>
                                                 <li><a href="listing-grid-2-full.html">Clothing</a></li>
@@ -165,30 +165,9 @@
                                                 <li><a href="listing-grid-4-sidebar-left.html">Shoes</a></li>
                                             </ul>
                                         </li>
-                                        <li><span><a href="#">Boys</a></span>
-                                            <ul>
-                                                <li><a href="listing-grid-6-sidebar-left.html">Easy On Shoes</a></li>
-                                                <li><a href="listing-grid-7-sidebar-right.html">Clothing</a></li>
-                                                <li><a href="listing-row-3-sidebar-left.html">Must Have</a></li>
-                                                <li><a href="listing-row-4-sidebar-extended.html">All Boys</a></li>
-                                            </ul>
-                                        </li>
-                                        <li><span><a href="#">Girls</a></span>
-                                            <ul>
-                                                <li><a href="listing-grid-1-full.html">New Releases</a></li>
-                                                <li><a href="listing-grid-2-full.html">Clothing</a></li>
-                                                <li><a href="listing-grid-3.html">Sale</a></li>
-                                                <li><a href="listing-grid-4-sidebar-left.html">Best Sellers</a></li>
-                                            </ul>
-                                        </li>
-                                        <li><span><a href="#">Customize</a></span>
-                                            <ul>
-                                                <li><a href="listing-row-1-sidebar-left.html">For Men</a></li>
-                                                <li><a href="listing-row-2-sidebar-right.html">For Women</a></li>
-                                                <li><a href="listing-row-4-sidebar-extended.html">For Boys</a></li>
-                                                <li><a href="listing-grid-1-full.html">For Girls</a></li>
-                                            </ul>
-                                        </li>
+                                        
+                                        
+                                       
                                     </ul>
                                 </div>
                             </li>
@@ -227,7 +206,7 @@
                             <!-- /dropdown-cart-->
                         </li>
                         <li>
-                            <a href="${pageContext.request.contextPath}/favourites/viewfavourites${login.phone}.htm" class="wishlist"><span>Wishlist</span></a>
+                            <a href="${pageContext.request.contextPath}/favourites/viewfavourites/${login.phone}.htm" class="wishlist"><span>Wishlist</span></a>
                         </li>
                         <li>
                             <div class="dropdown dropdown-access">
@@ -247,7 +226,7 @@
                                             <a href="track-order.html"><i class="ti-truck"></i>Track your Order</a>
                                         </li>
                                         <li>
-                                            <a href="account.html"><i class="ti-package"></i>My Orders</a>
+                                            <a href="${pageContext.request.contextPath}/order/detail/${login.phone}.htm"><i class="ti-package"></i>My Orders</a>
                                         </li>
                                         <li>
                                             <a href="account.html"><i class="ti-user"></i>My Profile</a>
