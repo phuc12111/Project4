@@ -30,18 +30,23 @@ public class Login {
     public String showcart() {
         return "account";
     }
-
-    @PostMapping("/alogin")
-    public String login(@ModelAttribute("phone") String phone, @ModelAttribute("password") String password, ModelMap model, HttpSession session) {
-        com.models.Login login = loginDAO.login(phone, password);
-        if (login != null) {
-            session.setAttribute("login", login);
+@PostMapping("/alogin")
+public String login(@ModelAttribute("phone") String phone, @ModelAttribute("password") String password, ModelMap model, HttpSession session) {
+    com.models.Login login = loginDAO.login(phone, password);
+    if (login != null) {
+        session.setAttribute("login", login);
+        com.models.Login loggedInUser = loginDAO.findByUser(phone);  
+        if (loggedInUser != null){
             List<com.models.Product> listPro = productDAO.findAll();
             model.addAttribute("listPro", listPro);
+            model.addAttribute("login", loggedInUser);  
             return "index";
-        } else {
-            model.addAttribute("error", "Invalid username or password");
-            return "account";
         }
+    } else {
+        model.addAttribute("error", "Invalid username or password");
+        return "account";
     }
+    return "account";  
+}
+
 }

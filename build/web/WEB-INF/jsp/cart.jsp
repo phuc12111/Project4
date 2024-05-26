@@ -53,7 +53,14 @@
                                 <li>Page active</li>
                             </ul>
                         </div>
-                        <h1>Cart page</h1>
+                        <c:choose>
+                            <c:when test="${empty login}">
+                                <h1>Cart page</h1>
+                            </c:when>
+                            <c:otherwise>  
+                                <h1>Cart page of ${login.memberName} </h1>
+                            </c:otherwise>
+                        </c:choose>
                     </div>
                     <!-- /page_header -->
                     <table class="table table-striped cart-list">
@@ -102,52 +109,76 @@
                             </c:forEach>
                         </tbody>
                     </table>
+                    <div class="col-sm-4 text-end">
 
-                    <div class="row add_top_30 flex-sm-row-reverse cart_actions">
 
-                        <div class="col-sm-4 text-end">
-                            <form action="${pageContext.request.contextPath}/cart/clearCart.htm" method="post">
-                                <button type="button" class="btn_1 gray">clean cart</button> 
-                            </form>
-                        </div>
 
-                        <div class="col-sm-8">
-                            <div class="apply-coupon">
-                                <div class="form-group">
-                                    <div class="row g-2">
-                                        <div class="col-md-6"><input type="text" name="coupon-code" value="" placeholder="Promo code" class="form-control"></div>
-                                        <div class="col-md-4"><button type="button" class="btn_1 outline">Apply Coupon</button></div>
-                                    </div>
+
+                        <form action="${pageContext.request.contextPath}/cart/cartship.htm" method="post">
+                            <label for="shipperName">Chọn đối tác vận chuyển:</label>
+                            <select id="shipperName" name="shipperName" onchange="updateShippingCost()">
+                                <c:forEach var="de" items="${listde}">
+                                    <option value="${de.getShipperName()}">${de.getShipperName()}</option>
+                                </c:forEach>
+                            </select>
+                            <input type="submit" value="Chọn">
+                        </form>
+                        <button type="button" class="btn_1 gray"><a href="${pageContext.request.contextPath}/cart/clearCart.htm">Clean cart</a></button> 
+                    </div>
+                    <div class="box_cart">
+                        <div class="container">
+                            <div class="row justify-content-end">
+                                <div class="col-xl-4 col-lg-4 col-md-6">
+                                    <ul>
+                                        <li>
+                                            <span>Subtotal</span> ${sessionScope.myCartTotal}
+                                        </li>
+                                        <li>
+                                            <span>Shipping</span> ${deliveries.getPrice() +0}
+                                        </li>
+                                        <li>
+                                            <span>Total</span> ${sessionScope.myCartTotal + deliveries.getPrice()} 
+                                        </li>
+                                    </ul>
+
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <!-- /cart_actions -->
+
+                    <!-- /box_cart -->
+
+
+
+                    <form action="${pageContext.request.contextPath}/check/checkout.htm" method="post">
+                        <label class="container_radio" style="display: inline-block; margin-right: 15px;">
+                            Thanh toan off
+                            <input type="radio" name="status" value="1" checked>
+                            <span class="checkmark"></span>
+                        </label>
+                        <label class="container_radio" style="display: inline-block;">
+                            thanh toan onl
+                            <input type="radio" name="status" value="2">
+                            <span class="checkmark"></span>
+                        </label>
+
+                        <input type="hidden" name="deliveryID" value="${deliveries.getDeliveryID()}">
+                        <div>Địa chỉ nhận hàng</div>
+                        <div class="col-md-6">
+                            <input type="text" name="shipAddress" value="${login.address}" class="form-control">
+                        </div>
+
+                        <input type="text" name="phone" value="${login.phone}" class="form-control" placeholder="Phone">
+
+                        <button type="submit" class="btn_1 full-width cart">check out </button>
+
+                    </form>
+
 
                 </div>
                 <!-- /container -->
 
-                <div class="box_cart">
-                    <div class="container">
-                        <div class="row justify-content-end">
-                            <div class="col-xl-4 col-lg-4 col-md-6">
-                                <ul>
-                                    <li>
-                                        <span>Subtotal</span> ${sessionScope.myCartTotal}
-                                    </li>
-                                    <li>
-                                        <span>Shipping</span> $7.00
-                                    </li>
-                                    <li>
-                                        <span>Total</span> ${sessionScope.myCartTotal + 7} 
-                                    </li>
-                                </ul>
-                                <a href="cart-2.html" class="btn_1 full-width cart">Proceed to Checkout</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- /box_cart -->
+
 
             </main>
             <!--/main-->

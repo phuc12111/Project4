@@ -143,7 +143,7 @@
                     </div>
                     <div class="row small-gutters">
                         <c:forEach var="pro" items="${listPro}" varStatus="status">
-                           <div class="col-6 col-md-4 col-xl-3">
+                            <div class="col-6 col-md-4 col-xl-3">
                                 <div class="grid_item">
                                     <figure>
                                         <span class="ribbon off">-30%</span>
@@ -167,10 +167,27 @@
                                         <span class="old_price">$60.00</span>
                                     </div>
                                     <ul>
-                                        <li><a href="#0" class="tooltip-1" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to favorites"><i class="ti-heart"></i><span>Add to favorites</span></a></li>
-                                        <li><a href="#0" class="tooltip-1" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to compare"><i class="ti-control-shuffle"></i><span>Add to compare</span></a></li>
-                                        <li><a href="cart/add/${pro.productID}.htm" class="tooltip-1" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to cart"><i class="ti-shopping-cart"></i><span>Add to cart</span></a></li>
+                                        <li>
+                                            <a href="${pageContext.request.contextPath}/favourites/add/${pro.productID}/${login.phone}.htm" class="tooltip-1" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to favorites">
+                                                <i class="ti-heart"></i><span>Add to favorites</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <form id="favouritesForm" action="/favourites/add" method="post" style="display:none;">
+                                                <input type="hidden" name="productID" value="${pro.productID}" />
+                                                <input type="hidden" name="phone" value="${login.phone}" />
+                                            </form>
+                                            <a href="#0" class="tooltip-1" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to favourites" onclick="document.getElementById('favouritesForm').submit();">
+                                                <i class="ti-control-shuffle"></i><span>Add to favourites</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="${pageContext.request.contextPath}/cart/add/${pro.productID}.htm" class="tooltip-1" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to cart">
+                                                <i class="ti-shopping-cart"></i><span>Add to cart</span>
+                                            </a>
+                                        </li>
                                     </ul>
+
                                 </div>
                                 <!-- /grid_item -->
                             </div>
@@ -422,11 +439,11 @@
         <div id="toTop"></div><!-- Back to top button -->
 
         <!-- COMMON SCRIPTS -->
-        <script src="js/common_scripts.min.js"></script>
-        <script src="js/main.js"></script>
+        <script src="${pageContext.request.contextPath}/js/common_scripts.min.js"></script>
+        <script src="${pageContext.request.contextPath}/js/main.js"></script>
 
         <!-- SPECIFIC SCRIPTS -->
-        <script src="js/carousel-home.min.js"></script>
+        <script src="${pageContext.request.contextPath}/js/carousel-home.min.js"></script>
 
     </body>
 </html>

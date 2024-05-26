@@ -185,20 +185,7 @@
                                             <!-- /row -->
 
                                         </div>
-                                        <!-- /private -->
-                                        <div class="company box" style="display: none;">
-                                            <div class="row no-gutters">
-                                                <div class="col-12">
-                                                    <div class="form-group">
-                                                        <input type="text" class="form-control" placeholder="Company Name*">
-                                                    </div>
-                                                </div>
-                                                <div class="col-12">
-                                                    <div class="form-group">
-                                                        <input type="text" class="form-control" placeholder="Full Address">
-                                                    </div>
-                                                </div>
-                                            </div>
+                                        
                                             <!-- /row -->
                                             <div class="row no-gutters">
                                                 <div class="col-6 pr-1">

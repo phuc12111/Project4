@@ -25,7 +25,7 @@
                         </div>
                         <ul>
                             <li class="submenu">
-                                <a href="javascript:void(0);" class="show-submenu">Home</a>
+                                <a href="${pageContext.request.contextPath}/index.htm" class="show-submenu">Home</a>
                                 <ul>
                                     <li><a href="index.html">Slider</a></li>
                                     <li><a href="index-2.html">Video Background</a></li>
@@ -205,7 +205,7 @@
                     <ul class="top_tools">
                         <li>
                             <div class="dropdown dropdown-cart">
-                                <a href="cart/cart.htm" class="cart_bt"><strong>${sessionScope.myCartNum}</strong></a>
+                                <a href="${pageContext.request.contextPath}/cart/cart.htm" class="cart_bt"><strong>${sessionScope.myCartNum}</strong></a>
                                 <div class="dropdown-menu">
                                     <ul>
                                         <c:forEach var="map" items="${sessionScope.myCartItems}">
@@ -214,26 +214,34 @@
                                                     <figure><img src="${pageContext.request.contextPath}/${map.value.product.picture}" data-src="${pageContext.request.contextPath}/${map.value.product.picture}" alt="" width="50" height="50" class="lazy"></figure>
                                                     <strong><span>${map.value.product.productName}</span>${map.value.product.price}</strong>
                                                 </a>
-                                                
+
                                             </li>
                                         </c:forEach>
                                     </ul>
                                     <div class="total_drop">
                                         <div class="clearfix"><strong>Total</strong><span>${sessionScope.myCartTotal}</span></div>
-                                        <a href="cart/cart.htm" class="btn_1 outline">View Cart</a><a href="checkout.html" class="btn_1">Checkout</a>
+                                        <a href="${pageContext.request.contextPath}/cart/cart.htm" class="btn_1 outline">View Cart</a><a href="checkout.html" class="btn_1">Checkout</a>
                                     </div>
                                 </div>
                             </div>
                             <!-- /dropdown-cart-->
                         </li>
                         <li>
-                            <a href="#0" class="wishlist"><span>Wishlist</span></a>
+                            <a href="${pageContext.request.contextPath}/favourites/viewfavourites${login.phone}.htm" class="wishlist"><span>Wishlist</span></a>
                         </li>
                         <li>
                             <div class="dropdown dropdown-access">
-                                <a href="account.html" class="access_link"><span>Account</span></a>
+                                <a href="${pageContext.request.contextPath}/login/login.htm" class="access_link"><span>Account</span></a>
                                 <div class="dropdown-menu">
-                                    <a href="login/login.htm" class="btn_1">Sign In or Sign Up</a>
+                                    <c:choose>
+                                        <c:when test="${empty login}">
+                                            <a href="${pageContext.request.contextPath}/login/login.htm" class="btn_1">Sign In or Sign Up</a>
+                                        </c:when>
+                                        <c:otherwise>  
+                                            <strong><span>${login.memberName}</span>${login.phone}</strong>
+                                        </c:otherwise>
+                                    </c:choose>
+                                    
                                     <ul>
                                         <li>
                                             <a href="track-order.html"><i class="ti-truck"></i>Track your Order</a>
@@ -247,6 +255,17 @@
                                         <li>
                                             <a href="help.html"><i class="ti-help-alt"></i>Help and Faq</a>
                                         </li>
+                                        <c:choose>
+                                        <c:when test="${empty login}">
+                                            
+                                        </c:when>
+                                        <c:otherwise>  
+                                            <li>
+                                                <a href="help.html"><i class="ti-shift-right"></i>Out accout</a>
+                                            </li>
+                                        </c:otherwise>
+                                    </c:choose>
+                                        
                                     </ul>
                                 </div>
                             </div>

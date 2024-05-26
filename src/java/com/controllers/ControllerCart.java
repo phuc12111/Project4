@@ -1,8 +1,11 @@
 package com.controllers;
 
 import com.models.Cart;
+import com.models.Deliveries;
 import com.models.Product;
 import com.servlets.CartDAO;
+import com.servlets.DeliveriesDAO;
+import com.servlets.LoginDAO;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -17,13 +20,20 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping(value = "cart")
 public class ControllerCart {
 
     @Autowired
-    private CartDAO CartDAO;
+    private CartDAO cartDAO;
+
+    @Autowired
+    private DeliveriesDAO deliveriesDAO;
+
+    @Autowired
+    private LoginDAO loginDAO;
 
     @RequestMapping(value = "add/{productID}", method = RequestMethod.GET)
     public String addToCart(ModelMap mm, HttpSession session, @PathVariable("productID") int productID) {
@@ -31,7 +41,7 @@ public class ControllerCart {
         if (cartItems == null) {
             cartItems = new HashMap<>();
         }
-        Product product = CartDAO.findById(productID);
+        Product product = cartDAO.findById(productID);
         if (product != null) {
             Cart item = cartItems.get(productID);
             if (item == null) {
@@ -49,6 +59,10 @@ public class ControllerCart {
 
     @RequestMapping(value = "remove/{productID}", method = RequestMethod.GET)
     public String viewRemove(ModelMap mm, HttpSession session, @PathVariable("productID") int productID) {
+        
+        List<Deliveries> listde = deliveriesDAO.findAll();
+        mm.addAttribute("listde", listde);
+        
         HashMap<Integer, Cart> cartItems = (HashMap<Integer, Cart>) session.getAttribute("myCartItems");
         if (cartItems == null) {
             cartItems = new HashMap<>();
@@ -67,21 +81,58 @@ public class ControllerCart {
         }
         return total;
     }
-    
+
     @RequestMapping(value = "cart", method = RequestMethod.GET)
-    public String showcart() {
-        return "cart";
+    public String showcart(ModelMap mm, HttpSession session) {
+        com.models.Login sessionLogin = (com.models.Login) session.getAttribute("login");
+        List<Deliveries> listde = deliveriesDAO.findAll();
+        mm.addAttribute("listde", listde);
+        if (sessionLogin != null) {
+            String phone = sessionLogin.getPhone();
+            com.models.Login login = loginDAO.findByUser(phone);
+
+            mm.addAttribute("login", login);
+            return "cart";
+
+        } else {
+
+            return "cart";
+        }
     }
-    
 
+    @RequestMapping(value = "cartship", method = RequestMethod.POST)
+    public String showcartship(ModelMap mm, @RequestParam("shipperName") String shipperName, HttpSession session) {
+        com.models.Login sessionLogin = (com.models.Login) session.getAttribute("login");
+        List<Deliveries> listde = deliveriesDAO.findAll();
+        mm.addAttribute("listde", listde);
 
-@RequestMapping(value = "deletecart/{productID}", method = RequestMethod.GET)
+        Deliveries deliveries = deliveriesDAO.findByShipperName(shipperName);
+        mm.addAttribute("deliveries", deliveries);
+
+        if (sessionLogin != null) {
+            String phone = sessionLogin.getPhone();
+            com.models.Login login = loginDAO.findByUser(phone);
+
+            mm.addAttribute("login", login);
+            return "cart";
+
+        } else {
+
+            return "cart";
+        }
+    }
+
+    @RequestMapping(value = "deletecart/{productID}", method = RequestMethod.GET)
     public String giamcart(ModelMap mm, HttpSession session, @PathVariable("productID") int productID) {
+        
+        List<Deliveries> listde = deliveriesDAO.findAll();
+        mm.addAttribute("listde", listde);
+        
         HashMap<Integer, Cart> cartItems = (HashMap<Integer, Cart>) session.getAttribute("myCartItems");
         if (cartItems == null) {
             cartItems = new HashMap<>();
         }
-        Product product = CartDAO.findById(productID);
+        Product product = cartDAO.findById(productID);
         if (product != null) {
             Cart item = cartItems.get(productID);
             if (item != null) {
@@ -96,14 +147,18 @@ public class ControllerCart {
         }
         return "cart";
     }
-   
+
     @RequestMapping(value = "addcart/{productID}", method = RequestMethod.GET)
     public String tangcart(ModelMap mm, HttpSession session, @PathVariable("productID") int productID) {
+        
+        List<Deliveries> listde = deliveriesDAO.findAll();
+        mm.addAttribute("listde", listde);
+        
         HashMap<Integer, Cart> cartItems = (HashMap<Integer, Cart>) session.getAttribute("myCartItems");
         if (cartItems == null) {
             cartItems = new HashMap<>();
         }
-        Product product = CartDAO.findById(productID);
+        Product product = cartDAO.findById(productID);
         if (product != null) {
             Cart item = cartItems.get(productID);
             if (item == null) {
@@ -118,15 +173,19 @@ public class ControllerCart {
         }
         return "cart";
     }
-    
-      @RequestMapping(value = "clearCart", method = RequestMethod.GET)
-    public String clearCart(HttpSession session) {
+
+    @RequestMapping(value = "clearCart", method = RequestMethod.GET)
+    public String clearCart(ModelMap mm, HttpSession session) {
+        
+        List<Deliveries> listde = deliveriesDAO.findAll();
+        mm.addAttribute("listde", listde);
+        
         session.removeAttribute("myCartItems");
         session.setAttribute("myCartTotal", 0.0);
         session.setAttribute("myCartNum", 0);
         return "cart";
     }
-    
+
 //    @RequestMapping(value = "checkout", method = RequestMethod.POST)
 //    public String viewCheckout(ModelMap mm, HttpSession session,
 //                               @RequestParam("shipperName") String shipperName,

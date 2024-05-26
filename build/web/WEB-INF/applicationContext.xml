@@ -32,4 +32,14 @@
     <bean id="ldao" class="com.servlets.LoginDAOiml">
         <property name="jdbcTemplate" ref="jdbcTemplate"></property>
     </bean>
+    <bean id="chdao" class="com.servlets.CheckoutDAOiml">
+        <property name="jdbcTemplate" ref="jdbcTemplate"></property>
+    </bean>
+        <bean id="ddao" class="com.servlets.DeliveriesDAOiml">
+        <property name="jdbcTemplate" ref="jdbcTemplate"></property>
+    </bean>
+    <bean id="fdao" class="com.servlets.FavouritesDAOiml">
+        <property name="jdbcTemplate" ref="jdbcTemplate"></property>
+    </bean>
+    
 </beans>
