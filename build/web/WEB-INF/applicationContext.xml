@@ -44,4 +44,7 @@
     <bean id="viodao" class="com.servlets.ViewOrderDAOiml">
         <property name="jdbcTemplate" ref="jdbcTemplate"></property>
     </bean>
+    <bean id="cadao" class="com.servlets.CategoryDAOiml">
+        <property name="jdbcTemplate" ref="jdbcTemplate"></property>
+    </bean>
 </beans>

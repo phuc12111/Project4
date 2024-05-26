@@ -139,35 +139,9 @@
                                 </span>
                                 <div id="menu">
                                     <ul>
-                                        <li><span><a href="#0">Game DVD</a></span>
-                                            <ul>
-                                                <li><a href="listing-grid-1-full.html">Trending</a></li>
-                                                <li><a href="listing-grid-2-full.html">Life style</a></li>
-                                                <li><a href="listing-grid-3.html">Running</a></li>
-                                                <li><a href="listing-grid-4-sidebar-left.html">Training</a></li>
-                                                <li><a href="listing-grid-5-sidebar-right.html">View all Collections</a></li>
-                                            </ul>
-                                        </li>
-                                        <li><span><a href="#">Music DVD</a></span>
-                                            <ul>
-                                                <li><a href="listing-grid-6-sidebar-left.html">Offers</a></li>
-                                                <li><a href="listing-grid-7-sidebar-right.html">Shoes</a></li>
-                                                <li><a href="listing-row-1-sidebar-left.html">Clothing</a></li>
-                                                <li><a href="listing-row-3-sidebar-left.html">Accessories</a></li>
-                                                <li><a href="listing-row-4-sidebar-extended.html">Equipment</a></li>
-                                            </ul>
-                                        </li>
-                                        <li><span><a href="#">Film DVD</a></span>
-                                            <ul>
-                                                <li><a href="listing-grid-1-full.html">Best Sellers</a></li>
-                                                <li><a href="listing-grid-2-full.html">Clothing</a></li>
-                                                <li><a href="listing-grid-3.html">Accessories</a></li>
-                                                <li><a href="listing-grid-4-sidebar-left.html">Shoes</a></li>
-                                            </ul>
-                                        </li>
-                                        
-                                        
-                                       
+                                        <c:forEach var="ca" items="${cate}">
+                                            <li><span><a href="${pageContext.request.contextPath}/category/detail/${ca.categoryID}.htm">${ca.categoryName}</a></span></li>
+                                        </c:forEach>
                                     </ul>
                                 </div>
                             </li>
