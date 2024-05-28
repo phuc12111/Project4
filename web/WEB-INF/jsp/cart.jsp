@@ -53,62 +53,92 @@
                                 <li>Page active</li>
                             </ul>
                         </div>
+                        
                         <c:choose>
                             <c:when test="${empty login}">
                                 <h1>Cart page</h1>
                             </c:when>
                             <c:otherwise>  
                                 <h1>Cart page of ${login.memberName} </h1>
+
                             </c:otherwise>
                         </c:choose>
                     </div>
-                    <!-- /page_header -->
-                    <table class="table table-striped cart-list">
-                        <thead>
-                            <tr>
-                                <th>
-                                    Product
-                                </th>
-                                <th>
-                                    Price
-                                </th>
-                                <th>
-                                    Quantity
-                                </th>
-                                <th>
-                                    Subtotal
-                                </th>
-                                <th>
 
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <c:forEach var="map" items="${sessionScope.myCartItems}">
-                                <tr>
-                                    <td>
-                                        <div class="thumb_cart">
-                                            <img src="${pageContext.request.contextPath}/${map.value.product.picture}" data-src="${pageContext.request.contextPath}/${map.value.product.picture}" class="lazy" alt="Image">
-                                        </div>
-                                        <span class="item_cart">${map.value.product.productName}</span>
-                                    </td>
-                                    <td>
-                                        <strong>${map.value.product.price}</strong>
-                                    </td>
-                                    <td>
-                                        <div class="numbers-row"><input type="text" value="${map.value.quantity}" id="quantity_1" class="qty2" name="quantity_1">
-                                            <div class="inc button_inc"><a href="${pageContext.request.contextPath}/cart/addcart/${map.key}.htm">+</a></div><div class="dec button_inc"><a href="${pageContext.request.contextPath}/cart/deletecart/${map.key}.htm">-</a></div></div>
-                                    </td>
-                                    <td>
-                                        <strong>${map.value.product.price * map.value.quantity}</strong>
-                                    </td>
-                                    <td class="options">
-                                        <a href="${pageContext.request.contextPath}/cart/remove/${map.key}.htm"><i class="ti-trash"></i></a>
-                                    </td>
-                                </tr>
-                            </c:forEach>
-                        </tbody>
-                    </table>
+                    <c:choose>
+                        <c:when test="${empty sessionScope.myCartItems}">
+                            <h1>Vui lòng trở về trang chủ mua hàng</h1>
+                            <form action="${pageContext.request.contextPath}/index.htm" method="get">
+                                <div class="col-sm-4 text-end">
+                                    <button type="submit">Go Home</button>
+                                </div>
+                            </form>
+                        </c:when>
+                        <c:otherwise>  
+                            <table class="table table-striped cart-list">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            Product
+                                        </th>
+                                        <th>
+                                            Price
+                                        </th>
+                                        <th></th>
+                                        <th></th>
+                                        <th>
+                                            Quantity
+                                        </th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th>
+                                            Subtotal
+                                        </th>
+                                        <th>
+
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <c:forEach var="map" items="${sessionScope.myCartItems}">
+                                        <tr>
+                                            <td>
+                                                <div class="thumb_cart">
+                                                    <img src="${pageContext.request.contextPath}/${map.value.product.picture}" data-src="${pageContext.request.contextPath}/${map.value.product.picture}" class="lazy" alt="Image">
+                                                </div>
+                                                <span class="item_cart">${map.value.product.productName}</span>
+                                            </td>
+                                            <td>
+                                                <strong>${map.value.product.price}</strong>
+                                            </td>
+                                            <td></td>
+                                            <td><div class="button-cart" ><a href="${pageContext.request.contextPath}/cart/deletecart/${map.key}.htm" >-</a></div></td>
+                                            <td>
+                                                <div class="numbers-list">
+
+                                                    <input type="text" value="${map.value.quantity}" id="quantity_1" class="qty2 center" name="quantity_1">
+
+                                                </div>
+                                            </td>
+                                            <td><div class="button-cart"><a href="${pageContext.request.contextPath}/cart/addcart/${map.key}.htm">+</a></div></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td>
+                                                <strong>${map.value.product.price * map.value.quantity}</strong>
+                                            </td>
+                                            <td class="options">
+                                                <a href="${pageContext.request.contextPath}/cart/remove/${map.key}.htm"><i class="ti-trash"></i></a>
+                                            </td>
+                                        </tr>
+                                    </c:forEach>
+                                </tbody>
+                            </table>
+                        </c:otherwise>
+                    </c:choose>
+
 
 
 
@@ -127,7 +157,7 @@
                                                     <option value="${de.getShipperName()}">${de.getShipperName()}</option>
                                                 </c:forEach>
                                             </select>
-                                             <input type="submit" value="Submit">
+                                            <input type="submit" value="Submit">
                                         </form>
 
                                     </div>
@@ -201,8 +231,12 @@
         <div id="toTop"></div><!-- Back to top button -->
 
         <!-- COMMON SCRIPTS -->
-        <script src="js/common_scripts.min.js"></script>
-        <script src="js/main.js"></script>
+        <script src="${pageContext.request.contextPath}/js/common_scripts.min.js"></script>
+        <script src="${pageContext.request.contextPath}/js/main.js"></script>
+
+        <!-- SPECIFIC SCRIPTS -->
+        <script src="${pageContext.request.contextPath}/js/sticky_sidebar.min.js"></script>
+        <script src="${pageContext.request.contextPath}/js/specific_listing.js"></script>
 
 
     </body>

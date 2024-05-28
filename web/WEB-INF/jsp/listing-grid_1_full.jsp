@@ -305,8 +305,8 @@
 	<div id="toTop"></div><!-- Back to top button -->
 	
 	<!-- COMMON SCRIPTS -->
-    <script src="js/common_scripts.min.js"></script>
-    <script src="js/main.js"></script>
+    <script src="${pageContext.request.contextPath}/js/common_scripts.min.js"></script>
+    <script src="${pageContext.request.contextPath}/js/main.js"></script>
 	
 	<!-- SPECIFIC SCRIPTS -->
 	<script src="${pageContext.request.contextPath}/js/sticky_sidebar.min.js"></script>
