@@ -24,8 +24,9 @@ public class OrderdetailView {
     private int quantity;
     private String phone;
     private String picture;
+    private String memberName;
 
-    public OrderdetailView(int orderID, Timestamp orderDate, Timestamp deliveryDate, String shipAddress, String status, String paymentName, String deliveryName, String productName, int productID, double price, int quantity, String phone, String picture) {
+    public OrderdetailView(int orderID, Timestamp orderDate, Timestamp deliveryDate, String shipAddress, String status, String paymentName, String deliveryName, String productName, int productID, double price, int quantity, String phone, String picture, String memberName) {
         this.orderID = orderID;
         this.orderDate = orderDate;
         this.deliveryDate = deliveryDate;
@@ -39,7 +40,10 @@ public class OrderdetailView {
         this.quantity = quantity;
         this.phone = phone;
         this.picture = picture;
+        this.memberName = memberName;
     }
+
+    
 
     
 
@@ -148,6 +152,14 @@ public class OrderdetailView {
 
     public void setPicture(String picture) {
         this.picture = picture;
+    }
+
+    public String getMemberName() {
+        return memberName;
+    }
+
+    public void setMemberName(String memberName) {
+        this.memberName = memberName;
     }
     
     

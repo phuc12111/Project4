@@ -12,6 +12,19 @@ import java.util.List;
  * @author asus
  */
 public interface DeliveriesDAO {
+
     public Deliveries findByShipperName(String shipperName);
+
     public List<Deliveries> findAll();
+
+    public void addDelivery(Deliveries delivery);
+
+    public void updateDelivery(Deliveries delivery);
+
+    public void deleteDelivery(int deliveryID);
+
+    public List<Deliveries> searchDeliveriesByDeliveryName(String shipperName);
+
+    public Deliveries findById(int deliveryID);
+
 }

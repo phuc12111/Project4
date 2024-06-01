@@ -5,10 +5,7 @@
  */
 package com.models;
 
-/**
- *
- * @author asus
- */
+
 public class Cart {
     private Product product;
     private int quantity;

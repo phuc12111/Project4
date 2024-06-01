@@ -1,6 +1,8 @@
 package com.controllers;
 
+import com.models.Favouritead;
 import com.models.Favourites;
+import com.models.FavouritesMember;
 import com.models.Login;
 import com.models.Product;
 import com.servlets.CartDAO;
@@ -13,9 +15,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping(value = "favourites")
@@ -96,4 +100,57 @@ public class FavouritesController {
         return "favourites";
     }
 
+    @RequestMapping(value = "viewfa", method = RequestMethod.GET)
+    public String viewfa(ModelMap mm, HttpSession session) {
+
+        List<FavouritesMember> listfa = favouritesDAO.get();
+        mm.addAttribute("listfa", listfa);
+        
+        List<Favouritead> faadmin = favouritesDAO.getTopFavourites();
+        mm.addAttribute("faadmin", faadmin);
+        
+        return "favouritesad";
+
+    }
+
+    
+    
+    @RequestMapping(value = "editFavouriteForm", method = RequestMethod.GET)
+    public String showEditFavouriteForm(@RequestParam("favouriteID") String id, ModelMap mm) {
+        Favourites favourite = favouritesDAO.getbyid(id);
+        mm.addAttribute("favourite", favourite);
+        return "edit_favourites";
+    }
+    
+    
+    @RequestMapping(value = "updateFavourite", method = RequestMethod.POST)
+    public String updateFavourite(@ModelAttribute("favourite") Favourites favourite, ModelMap mm) {
+        favouritesDAO.update(favourite);
+        List<FavouritesMember> listfa = favouritesDAO.get();
+        mm.addAttribute("listfa", listfa);
+        return "favouritesad";
+    }
+
+    @RequestMapping(value = "deleteFavourite/{favouriteID}", method = RequestMethod.GET)
+public String deleteFavourite(@PathVariable("favouriteID") int favouriteID, ModelMap mm) {
+    favouritesDAO.delete(favouriteID);
+    List<FavouritesMember> listfa = favouritesDAO.get();
+    mm.addAttribute("listfa", listfa);
+    return "favouritesad";
+}
+
+    @RequestMapping(value = "searchFavourites", method = RequestMethod.GET)
+    public String searchFavourites(@RequestParam("productName") String productName, ModelMap mm) {
+        List<FavouritesMember> listfa = favouritesDAO.search(productName);
+        mm.addAttribute("listfa", listfa);
+        return "favouritesad";
+    }
+
+    @ModelAttribute("favourite")
+    public Favourites setFavouriteForm() {
+        return new Favourites();
+    }
+
+    
+    
 }

@@ -117,9 +117,7 @@
                                             <td><div class="button-cart" ><a href="${pageContext.request.contextPath}/cart/deletecart/${map.key}.htm" >-</a></div></td>
                                             <td>
                                                 <div class="numbers-list">
-
-                                                    <input type="text" value="${map.value.quantity}" id="quantity_1" class="qty2 center" name="quantity_1">
-
+                                                    <input type="text" value="${map.value.quantity}" id="quantity_2" class="qty2" name="quantity_2">
                                                 </div>
                                             </td>
                                             <td><div class="button-cart"><a href="${pageContext.request.contextPath}/cart/addcart/${map.key}.htm">+</a></div></td>
@@ -193,22 +191,22 @@
 
 
                     <form action="${pageContext.request.contextPath}/check/checkout.htm" method="post">
-                        <label class="container_radio" style="display: inline-block; margin-right: 15px;">
-                            Thanh toan off
-                            <input type="radio" name="status" value="1" checked>
+                        <c:forEach var="pay" items="${pay}">
+                            <label class="container_radio" style="display: inline-block; margin-right: 15px;">
+                            ${pay.paymentName}
+                            <input type="radio" name="status" value="${pay.paymentID}" checked>
                             <span class="checkmark"></span>
                         </label>
-                        <label class="container_radio" style="display: inline-block;">
-                            thanh toan onl
-                            <input type="radio" name="status" value="2">
-                            <span class="checkmark"></span>
-                        </label>
-
+                        </c:forEach>
+                        
                         <input type="hidden" name="deliveryID" value="${deliveries.getDeliveryID()}">
                         <div>Địa chỉ nhận hàng</div>
                         <div class="col-md-6">
                             <input type="text" name="shipAddress" value="${login.address}" class="form-control">
+                            <input type="hidden" name="phone" value="${login.phone}" class="form-control">
+                            <input type="hidden" name="total" value="${sessionScope.myCartTotal + deliveries.getPrice()}" class="form-control">
                         </div>
+                        
                         <br>
                         <button type="submit" class="btn_1 full-width cart">check out </button>
 

@@ -33,14 +33,50 @@
 
         <!-- YOUR CUSTOM CSS -->
         <link href="${pageContext.request.contextPath}/css/custom.css" rel="stylesheet">
+        <style>
+            /* Popup form styling */
+            .modal {
+                display: none;
+                position: fixed;
+                z-index: 1;
+                padding-top: 100px;
+                left: 0;
+                top: 0;
+                width: 100%;
+                height: 100%;
+                overflow: auto;
+                background-color: rgba(0, 0, 0, 0.4);
+            }
 
+            .modal-content {
+                background-color: #FFF;
+                margin-bottom: 0px;
+                padding: 20px;
+                border: 1px solid #555;
+                width: 50%;
+                color: black;
+            }
+
+            .close {
+                color: #aaa;
+                float: right;
+                font-size: 28px;
+                font-weight: bold;
+            }
+
+            .close:hover,
+            .close:focus {
+                color: white;
+                text-decoration: none;
+                cursor: pointer;
+            }
+        </style>
     </head>
 
     <body>
-
         <div id="page">
-            <!--header-->
-            <%@include file="header.jsp" %>
+
+            <%@include file="header.jsp" %>s
 
             <main>
                 <div id="carousel-home">
@@ -169,9 +205,7 @@
                                     <ul>
                                         <li>
                                             <a href="${pageContext.request.contextPath}/favourites/add/${pro.productID}/${login.phone}.htm"  class="tooltip-1" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to favorites">
-                                                <i class="ti-heart" style="
-                                                   justify-content: center;
-                                                   align-items: center;"></i><span>Add to favorites</span>
+                                                <i class="ti-heart" style="justify-content: center; align-items: center;"></i><span>Add to favorites</span>
                                             </a>
                                         </li>
                                         <li>
@@ -179,7 +213,7 @@
                                                 <input type="hidden" name="productID" value="${pro.productID}" />
                                                 <input type="hidden" name="phone" value="${login.phone}" />
                                             </form>
-                                            <a href="#0" class="tooltip-1" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to favourites" onclick="document.getElementById('favouritesForm').submit();">
+                                            <a onclick="showAddAlbumForm(${pro.productID})" class="tooltip-1" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to favourites" onclick="document.getElementById('favouritesForm').submit();">
                                                 <i class="ti-control-shuffle"></i><span>Add to favourites</span>
                                             </a>
                                         </li>
@@ -189,13 +223,36 @@
                                             </a>
                                         </li>
                                     </ul>
-
+                                    <!-- Hidden input field to store the productID -->
+                                    <input type="hidden" id="productID_${pro.productID}" name="productID" value="${pro.productID}">
                                 </div>
                                 <!-- /grid_item -->
                             </div>
                         </c:forEach>
+                        <!-- /col -->
                     </div>
+                    <!-- /row -->
+                </div>
+                <!-- /container -->
 
+                <div class="featured lazy" data-bg="url(img/featured_home.jpg)">
+                    <div class="opacity-mask d-flex align-items-center" data-opacity-mask="rgba(0, 0, 0, 0.5)">
+                        <div class="container margin_60">
+                            <div class="row justify-content-center justify-content-md-start">
+                                <div class="col-lg-6 wow" data-wow-offset="150">
+                                    <h3>Armor<br>Air Color 720</h3>
+                                    <p>Lightweight cushioning and durable support with a Phylon midsole</p>
+                                    <div class="feat_text_block">
+                                        <div class="price_box">
+                                            <span class="new_price">$90.00</span>
+                                            <span class="old_price">$170.00</span>
+                                        </div>
+                                        <a class="btn_1" href="listing-grid-1-full.html" role="button">Shop Now</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <!-- /featured -->
 
@@ -429,30 +486,83 @@
                     </div>
                     <!-- /row -->
                 </div>
+                <!-- Popup form -->
+                <div id="addAlbumModal" class="modal">
+                    <div class="modal-content">
+                        <span class="close" onclick="closeAddAlbumForm()">&times;</span>
+                        <h6 class="mb-0">Add Album</h6>
+                        <form id="addAlbumForm" action="${pageContext.request.contextPath}/albums/adddetail.htm" method="post">
+                            <!-- Hidden input fields to store the selected album and product IDs -->
+                            <input type="hidden" id="selectedAlbumID" name="albumID" value="">
+                            <input type="hidden" id="selectedProductID" name="productID" value="">
+                            <table class="table table-striped cart-list">
+                                <thead>
+                                    <tr>
+                                        <th>Album Name</th>
+                                        <th>Product ID</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <c:forEach var="alb" items="${albums}">
+                                        <tr>
+                                            <td>
+                                                <label class="container_radio" style="display: inline-block; margin-right: 15px;">
+                                                    <input type="radio" name="albumID" value="${alb.albumID}" onchange="updateSelectedAlbum(this)">
+                                                    <span class="">${alb.albumName}</span>
+                                                    <span class="checkmark"></span>
+                                                </label>
+                                            </td>
+                                            <td>
+                                                <span id="displayedProductID"></span>
+                                            </td>
+                                        </tr>
+                                    </c:forEach>
+                                </tbody>
+                            </table>
+                            <button type="submit" class="btn btn-primary">Add Album</button>
+                        </form>
+                    </div>
+                </div>
                 <!-- /container -->
             </main>
-            <div class="popup_wrapper">
-		<div class="popup_content">
-			<span class="popup_close">Close</span>
-			<a href="listing-grid-1-full.html"><img class="img-fluid" src="img/products/Alien.jpg" alt="" width="500" height="500"></a>
-		</div>
-	</div>
-	<div id="toTop"></div>
             <!-- /main -->
-            <!--footer-->
+
             <%@include file="footer.jsp" %>
-            <!--/footer-->
         </div>
         <!-- page -->
-
+        <!--	<div class="popup_wrapper">
+                        <div class="popup_content">
+                                <span class="popup_close">Close</span>
+                                <a href="listing-grid-1-full.html"><img class="img-fluid" src="img/banner_popup.png" alt="" width="500" height="500"></a>
+                        </div>
+                </div>-->
         <div id="toTop"></div><!-- Back to top button -->
 
-        <!-- COMMON SCRIPTS -->
-        <script src="${pageContext.request.contextPath}/js/common_scripts.min.js"></script>
-        <script src="${pageContext.request.contextPath}/js/main.js"></script>
+    </div>
 
-        <!-- SPECIFIC SCRIPTS -->
-        <script src="${pageContext.request.contextPath}/js/carousel-home.min.js"></script>
+    <!-- COMMON SCRIPTS -->
+    <script src="${pageContext.request.contextPath}/js/common_scripts.min.js"></script>
+    <script src="${pageContext.request.contextPath}/js/main.js"></script>
 
-    </body>
+    <!-- SPECIFIC SCRIPTS -->
+    <script src="${pageContext.request.contextPath}/js/carousel-home.min.js"></script>
+    <script>
+                                        // Update the selected album ID when a radio button is clicked
+                                        function updateSelectedAlbum(radio) {
+                                            document.getElementById('selectedAlbumID').value = radio.value;
+                                        }
+
+                                        // Show the add album form
+                                        function showAddAlbumForm(productID) {
+                                            document.getElementById('addAlbumModal').style.display = "block";
+                                            // Set the product ID in the hidden input field
+                                            document.getElementById('selectedProductID').value = productID;
+                                        }
+
+                                        // Close the add album form
+                                        function closeAddAlbumForm() {
+                                            document.getElementById('addAlbumModal').style.display = "none";
+                                        }
+    </script>
+</body>
 </html>

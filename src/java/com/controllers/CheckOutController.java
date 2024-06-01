@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
 import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.util.*;
 
 @Controller
@@ -28,37 +29,42 @@ public class CheckOutController {
 
     @RequestMapping(value = "checkout", method = RequestMethod.POST)
     public String viewCheckout(ModelMap mm, HttpSession session,
-                               @RequestParam("deliveryID") int deliveryID,
-                               @RequestParam("status") int status,
-                               @RequestParam("shipAddress") String shipAddress,
-                               @RequestParam("phone") String phone) {
+            @RequestParam("deliveryID") int deliveryID,
+            @RequestParam("status") int status,
+            @RequestParam("shipAddress") String shipAddress,
+            @RequestParam("total") double total,
+            @RequestParam("phone") String phone) {
 
-        // Check if cart is empty
+       
         HashMap<Integer, Cart> cartItems = (HashMap<Integer, Cart>) session.getAttribute("myCartItems");
         if (cartItems == null || cartItems.isEmpty()) {
             mm.addAttribute("error", "Your cart is empty.");
             return "error";
         }
 
-        // Validate input parameters
+        
         if (shipAddress == null || shipAddress.isEmpty() || phone == null || phone.isEmpty()) {
             mm.addAttribute("error", "Invalid input parameters.");
             return "error";
         }
 
-        // Create new order
+        
         Orders order = new Orders();
-        order.setOrderDate(new Timestamp(new Date().getTime()));
+        
+       LocalDate today = LocalDate.now();
+        order.setOrderDate(today);
+
         Calendar deliveryCalendar = Calendar.getInstance();
-        deliveryCalendar.add(Calendar.DATE, 3); // Add 3 days for delivery
+        deliveryCalendar.add(Calendar.DATE, 3); 
         order.setDeliveryDate(new Timestamp(deliveryCalendar.getTimeInMillis()));
         order.setShipAddress(shipAddress);
         order.setPhone(phone);
+        order.setTotal(total);
         order.setPaymentID(status);
         order.setDeliveryID(deliveryID);
-        order.setStatus((status == 1) ? "chưa thanh toán" : "đã thanh toán");
+        order.setStatus("unconfimred");
 
-        // Save the order and order details
+        
         int orderId = checkoutDAO.createOrder(order);
         List<PurchasingInvoices> purchasingInvoicesList = new ArrayList<>();
         for (Map.Entry<Integer, Cart> entry : cartItems.entrySet()) {

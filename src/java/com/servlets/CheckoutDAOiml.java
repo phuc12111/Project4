@@ -26,8 +26,8 @@ public class CheckoutDAOiml implements CheckoutDAO{
     
         @Override
 public int createOrder(Orders order) {
-    String sql = "INSERT INTO Orders (orderDate, deliveryDate, shipAddress, status, paymentID, deliveryID, phone) VALUES (?, ?, ?, ?, ?,?,?)";
-    jdbcTemplate.update(sql, order.getOrderID(), order.getDeliveryDate(), order.getShipAddress(), order.getStatus(), order.getPaymentID(), order.getDeliveryID(), order.getPhone());
+    String sql = "INSERT INTO Orders (orderDate, deliveryDate, shipAddress , total, status, paymentID, deliveryID, phone) VALUES (?, ?,? , ?, ?, ?,?,?)";
+    jdbcTemplate.update(sql, order.getOrderID(), order.getDeliveryDate(), order.getShipAddress(), order.getTotal(), order.getStatus(), order.getPaymentID(), order.getDeliveryID(), order.getPhone());
     return getLastInsertedOrderId();
 }
 

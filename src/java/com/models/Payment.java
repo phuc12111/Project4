@@ -8,15 +8,15 @@ package com.models;
  *
  * @author asus
  */
-public class PymentI {
+public class Payment {
     private int paymentID;
     private String paymentName;
     private String description;
 
-    public PymentI() {
+    public Payment() {
     }
 
-    public PymentI(int paymentID, String paymentName, String description) {
+    public Payment(int paymentID, String paymentName, String description) {
         this.paymentID = paymentID;
         this.paymentName = paymentName;
         this.description = description;

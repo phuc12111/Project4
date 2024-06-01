@@ -55,7 +55,7 @@
                                 </ul>
                             </li>
                             <li>
-                                <a href="blog.html">Blog</a>
+                                <a href="${pageContext.request.contextPath}/albums/view/${login.phone}.htm">Albums</a>
                             </li>
                             <li>
                                 <a href="#0">Buy Template</a>

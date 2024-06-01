@@ -47,4 +47,16 @@
     <bean id="cadao" class="com.servlets.CategoryDAOiml">
         <property name="jdbcTemplate" ref="jdbcTemplate"></property>
     </bean>
+    <bean id="addao" class="com.servlets.AdminDAOiml">
+        <property name="jdbcTemplate" ref="jdbcTemplate"></property>
+    </bean>
+    <bean id="paddao" class="com.servlets.PayDAOiml">
+        <property name="jdbcTemplate" ref="jdbcTemplate"></property>
+    </bean>
+     <bean id="abddao" class="com.servlets.AlbumsDAOImpl">
+        <property name="jdbcTemplate" ref="jdbcTemplate"></property>
+    </bean>
+     <bean id="albumddao" class="com.servlets.AlbumdetailsDAOiml">
+        <property name="jdbcTemplate" ref="jdbcTemplate"></property>
+    </bean>
 </beans>

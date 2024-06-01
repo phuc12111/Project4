@@ -5,24 +5,31 @@
 package com.models;
 
 import java.sql.Timestamp;
-
+import java.time.LocalDate;
+import javax.persistence.Column;
 
 public class Orders {
+
     private int orderID;
-    private Timestamp orderDate;
+   
+    private LocalDate orderDate;
+
+    
     private Timestamp deliveryDate;
     private String shipAddress;
     private String status;
+    private double total;
     private int paymentID;
     private int deliveryID;
     private String phone;
 
-    public Orders(int orderID, Timestamp orderDate, Timestamp deliveryDate, String shipAddress, String status, int paymentID, int deliveryID, String phone) {
+    public Orders(int orderID, LocalDate orderDate, Timestamp deliveryDate, String shipAddress, String status, double total, int paymentID, int deliveryID, String phone) {
         this.orderID = orderID;
         this.orderDate = orderDate;
         this.deliveryDate = deliveryDate;
         this.shipAddress = shipAddress;
         this.status = status;
+        this.total = total;
         this.paymentID = paymentID;
         this.deliveryID = deliveryID;
         this.phone = phone;
@@ -39,11 +46,11 @@ public class Orders {
         this.orderID = orderID;
     }
 
-    public Timestamp getOrderDate() {
+    public LocalDate getOrderDate() {
         return orderDate;
     }
 
-    public void setOrderDate(Timestamp orderDate) {
+    public void setOrderDate(LocalDate orderDate) {
         this.orderDate = orderDate;
     }
 
@@ -94,5 +101,13 @@ public class Orders {
     public void setPhone(String phone) {
         this.phone = phone;
     }
-    
+
+    public double getTotal() {
+        return total;
+    }
+
+    public void setTotal(double total) {
+        this.total = total;
+    }
+
 }

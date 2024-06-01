@@ -24,14 +24,14 @@
 	<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
 
     <!-- BASE CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/css/bootstrap.min.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/css/style.css" rel="stylesheet">
 
 	<!-- SPECIFIC CSS -->
-    <link href="css/error_track.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/css/error_track.css" rel="stylesheet">
 
     <!-- YOUR CUSTOM CSS -->
-    <link href="css/custom.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/css/custom.css" rel="stylesheet">
 
 </head>
 
@@ -332,6 +332,7 @@
 					<div class="col-xl-7 col-lg-9">
 						<img src="img/404.svg" alt="" class="img-fluid" width="400" height="212">
 						<p>The page you're looking is not founded!</p>
+                                                <p>${admin.roleID}</p>
 						<form>
 							<div class="search_bar">
 								<input type="text" class="form-control" placeholder="What are you looking for?">
@@ -451,8 +452,8 @@
 	<div id="toTop"></div><!-- Back to top button -->
 	
 	<!-- COMMON SCRIPTS -->
-    <script src="js/common_scripts.min.js"></script>
-    <script src="js/main.js"></script>
+    <script src="${pageContext.request.contextPath}/js/common_scripts.min.js"></script>
+    <script src="${pageContext.request.contextPath}/js/main.js"></script>
 		
 </body>
 </html>

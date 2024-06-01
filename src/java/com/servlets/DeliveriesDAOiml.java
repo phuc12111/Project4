@@ -42,10 +42,45 @@ public class DeliveriesDAOiml implements DeliveriesDAO{
         }
         return de;
     }
+    
     @Override
     public Deliveries findByShipperName(String shipperName){
         String sql = "SELECT * FROM deliveries where shipperName = ?";
         return jdbcTemplate.queryForObject(sql, new Object[]{shipperName}, new BeanPropertyRowMapper<>(Deliveries.class));
     }
+    
+    
+     @Override
+    public void addDelivery(Deliveries delivery) {
+        String sql = "INSERT INTO deliveries (deliveryName, price, shipperName) VALUES (?, ?, ?)";
+        jdbcTemplate.update(sql, delivery.getDeliveryName(), delivery.getPrice(), delivery.getShipperName());
+    }
+
+    @Override
+    public void updateDelivery(Deliveries delivery) {
+        String sql = "UPDATE deliveries SET deliveryName = ?, price = ?,shipperName =? WHERE deliveryID = ?";
+        jdbcTemplate.update(sql, delivery.getDeliveryName(), delivery.getPrice(),delivery.getShipperName() , delivery.getDeliveryID());
+    }
+
+    @Override
+    public void deleteDelivery(int deliveryID) {
+        String sql = "DELETE FROM deliveries WHERE deliveryID = ?";
+        jdbcTemplate.update(sql, deliveryID);
+    }
+
+    @Override
+    public List<Deliveries> searchDeliveriesByDeliveryName(String shipperName) {
+    String searchSql = "SELECT * FROM deliveries WHERE shipperName LIKE ?";
+    String likePattern = "%" + shipperName + "%";
+    return jdbcTemplate.query(searchSql, new Object[]{likePattern}, new BeanPropertyRowMapper<>(Deliveries.class));
+}
+
+
+    @Override
+    public Deliveries findById(int deliveryID) {
+    String sql = "SELECT * FROM deliveries WHERE deliveryID = ?";
+    return jdbcTemplate.queryForObject(sql, new Object[]{deliveryID}, new BeanPropertyRowMapper<>(Deliveries.class));
+}
+
     
 }
