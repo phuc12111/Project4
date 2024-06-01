@@ -4,6 +4,7 @@
  */
 package com.servlets;
 
+import com.models.Albumdetails;
 import com.models.Product;
 import java.util.List;
 
@@ -13,4 +14,6 @@ import java.util.List;
  */
 public interface ProductDAO {
     public List<Product> findAll();
+    
+     public List<Albumdetails> getProductDetails(int albumID);
 }

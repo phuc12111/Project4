@@ -128,25 +128,32 @@
                         <c:when test="${not empty message}">
                             <h1>${message}</h1>
                         </c:when>
+                            
                         <c:otherwise>
                             <table class="table table-striped cart-list">
                                 <thead>
                                     <tr>
                                         <th>Album Name</th>
-                                       
-                                    </tr>
+                                        <th></th>
+                                         <th></th>
+                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <c:forEach var="alb" items="${albumsList}">
+                                     <c:forEach var="alb" items="${albumsList}">
+
                                         <tr>
                                             <td>
-                                                
+
                                                 <span class="item_cart">${alb.albumName}</span>
-                                                <a type="submit" class="btn btn-primary" href="${pageContext.request.contextPath}/albums/viewdeatail/${alb.albumID}.htm">xem chi tiet</a>
-                                               
+                                            </td>   
+                                            <td> 
+                                                <a type="submit" class="btn btn-primary" href="${pageContext.request.contextPath}/albums/viewProducts/${alb.albumID}.htm">Details</a>
                                             </td>
-                                            
-                                        </tr>
+                                               <td>
+                                                <a type="submit" class="btn btn-primary" href="${pageContext.request.contextPath}/albums/delete/${login.phone}/${alb.albumID}.htm">Delete</a>
+                                             </td>    
+                                        </tr>  
+
                                     </c:forEach>
                                 </tbody>
                             </table>
@@ -154,15 +161,17 @@
                     </c:choose>
 
                     <div class="d-flex align-items-center justify-content-between mb-4">
-                        <h6 class="mb-0">Albums</h6>
+                        
                         <button class="btn btn-primary" onclick="showAddAlbumForm()">Add Album</button>
                     </div>
-
-                    <div id="addAlbumModal" class="modal">
+                            
+                        <div id="addAlbumModal" class="modal">
                         <div class="modal-content">
                             <span class="close" onclick="closeAddAlbumForm()">&times;</span>
                             <h6 class="mb-0">Add Album</h6>
                             <form id="addAlbumForm" action="${pageContext.request.contextPath}/albums/add.htm" method="post">
+                                
+                                
                                 <div class="form-group row">
                                     <label for="albumName" class="col-sm-2 col-form-label">Album Name:</label>
                                     <div class="col-sm-10">
@@ -170,13 +179,14 @@
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    
+
                                     <div class="col-sm-10">
-                                       
+
                                         <input type="hidden" class="form-control" id="phone" value="${login.phone}" name="phone" required>
                                     </div>
                                 </div>
                                 <button type="submit" class="btn btn-primary">Add Album</button>
+                                
                             </form>
                         </div>
                     </div>

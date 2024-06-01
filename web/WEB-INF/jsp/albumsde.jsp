@@ -134,28 +134,28 @@
                                     <tr><th>Album Details</th></tr>
                                     <tr>
                                         <th>Name </th>
-                                        <th>Price</th>
                                         <th>Trailer</th>
+                                        
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <c:forEach var="albde" items="${albumsListde}">
-                                       
-                                        
+                                    <c:forEach var="pro" items="${products}">
+
+
                                         <tr>   
                                             <td>
-                                                <input class="item_cart" type="hidden" name="productID" >${albde.productID}</input>
-                                            </td>
 
-                                            <td>
-                                                <input class="item_cart"  name="productName" >${albde.productName}</input>
+                                                <span class="new_price" name="productName">${pro.productName}</span>
+
+
                                             </td>
+                                            
+                                            
                                             <td>
-                                                <input class="item_cart"  name="price" >${albde.price}</input>
+                                                <span class="new_price" name="trailer">${pro.audioFile}</span>
+
                                             </td>
-                                            <td>
-                                                <input class="item_cart"  name="price" >${albde.audioFile}</input>
-                                            </td>
+                                           
 
 
                                         </tr>

@@ -3,10 +3,12 @@ package com.controllers;
 import com.models.Albumdetails;
 import com.models.Albums;
 import com.models.Favourites;
+import com.models.Product;
 import com.servlets.AlbumdetailsDAO;
 import com.servlets.AlbumdetailsDAOiml;
 import com.servlets.AlbumsDAO;
 import com.servlets.LoginDAO;
+import com.servlets.ProductDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,6 +24,8 @@ import org.springframework.ui.ModelMap;
 @RequestMapping(value = "albums")
 public class AlbumsController {
 
+     @Autowired
+    private ProductDAO productsDAO; 
     @Autowired
     private AlbumsDAO albumsDAO;
 
@@ -67,7 +71,8 @@ public class AlbumsController {
         if (sessionLogin != null) {
             String phone = sessionLogin.getPhone();
             com.models.Login login = loginDAO.findByUser(phone);
-
+List<Albums> albumsList = albumsDAO.selectAlbums(phone);
+                model.addAttribute("albumsList", albumsList);
             model.addAttribute("login", login);
 
         }
@@ -106,10 +111,21 @@ public String addAlbumDetail(Model model, @ModelAttribute("albumdetails") Albumd
     }
 
     // Delete an album
-    @GetMapping("/delete/{albumID}")
-    public String deleteAlbum(@PathVariable("albumID") int albumID) {
+    @GetMapping("delete/{phone}/{albumID}")
+    public String deleteAlbum(ModelMap mm, @PathVariable("phone") String phone,    @PathVariable("albumID") int albumID) {
+          com.models.Login user = loginDAO.findByUser(phone);
+           if (user == null) {
+            mm.addAttribute("message", "User not found. Please log in.");
+            return "albums";
+        }
+           
         albumsDAO.deleteAlbum(albumID);
-        return "redirect:/albums/view";
+         // After deletion, retrieve the updated list of favourites
+         List<Albums> albumsList = albumsDAO.selectAlbums(phone);
+        mm.addAttribute("albumsList", albumsList);
+        mm.addAttribute("successfully", "Album item deleted successfully!");
+         
+        return "albums";
     }
 
     // Find an album by ID
@@ -119,4 +135,15 @@ public String addAlbumDetail(Model model, @ModelAttribute("albumdetails") Albumd
         model.addAttribute("album", album);
         return "viewAlbum";
     }
+    
+    
+
+  @RequestMapping(value = "viewProducts/{albumID}", method = RequestMethod.GET)
+    public String viewProducts(@PathVariable("albumID") int albumID, ModelMap model) {
+        List<Albumdetails> products = productsDAO.getProductDetails(albumID);
+        model.addAttribute("products", products);
+        return "albumsde"; // Tên của trang JSP để hiển thị danh sách sản phẩm
+    }
+    
+    
 }

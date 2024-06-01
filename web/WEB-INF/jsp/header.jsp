@@ -25,7 +25,7 @@
                         </div>
                         <ul>
                             <li class="submenu">
-                                <a href="${pageContext.request.contextPath}/index.htm" class="show-submenu">Home</a>
+                                <a href="${pageContext.request.contextPath}/login/home.htm" class="show-submenu">Home</a>
                                 <ul>
                                     <li><a href="index.html">Slider</a></li>
                                     <li><a href="index-2.html">Video Background</a></li>

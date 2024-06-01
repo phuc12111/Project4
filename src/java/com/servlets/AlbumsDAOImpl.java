@@ -15,6 +15,7 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 public class AlbumsDAOImpl implements AlbumsDAO {
+
     private JdbcTemplate jdbcTemplate;
 
     public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
@@ -28,7 +29,7 @@ public class AlbumsDAOImpl implements AlbumsDAO {
     @Override
     public void addAlbum(Albums album) {
         String sql = "INSERT INTO albums (albumName , phone) VALUES (?, ? )";
-        jdbcTemplate.update(sql, album.getAlbumName(),  album.getPhone());
+        jdbcTemplate.update(sql, album.getAlbumName(), album.getPhone());
     }
 
     @Override
@@ -42,15 +43,19 @@ public class AlbumsDAOImpl implements AlbumsDAO {
         String sql = "SELECT * FROM albums WHERE albumID = ?";
         return jdbcTemplate.queryForObject(sql, new Object[]{albumID}, new BeanPropertyRowMapper<>(Albums.class));
     }
-    
-    @Override
-public void deleteAlbum(int albumID) {
-    String sql = "DELETE FROM albums WHERE albumID = ?";
-    jdbcTemplate.update(sql, albumID);
-}
 
-@Override
-public List<Albums> selectAlbums(String phone) {
+    @Override
+    public void deleteAlbum(int albumID) {
+        String deleteAlbumDetailsSql = "DELETE FROM albumDetails WHERE albumID = ?";
+        jdbcTemplate.update(deleteAlbumDetailsSql, albumID);
+
+        // Xóa album
+        String deleteAlbumSql = "DELETE FROM albums WHERE albumID = ?";
+        jdbcTemplate.update(deleteAlbumSql, albumID);
+    }
+
+    @Override
+    public List<Albums> selectAlbums(String phone) {
         String sql = "select * from albums where phone =?";
         try {
             return jdbcTemplate.query(sql, new Object[]{phone}, new BeanPropertyRowMapper<>(Albums.class));
@@ -77,7 +82,5 @@ public List<Albums> selectAlbums(String phone) {
         }
         return albumsList;
     }
-    
-    
-}
 
+}

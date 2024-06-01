@@ -47,6 +47,9 @@ public class Index {
         List<com.models.Categories> cate = categoryDAO.findAll();
         model.addAttribute("cate", cate);
         return "index";
+        
+        
+        
     }
     
 

@@ -9,6 +9,7 @@ import com.models.Albums;
 import com.models.OrderdetailView;
 import com.servlets.AdminDAO;
 import com.servlets.AlbumsDAO;
+import com.servlets.CategoryDAO;
 
 import com.servlets.LoginDAO;
 import com.servlets.ProductDAO;
@@ -18,6 +19,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,8 +30,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class Login {
 
     @Autowired
+    private CategoryDAO categoryDAO;
+    @Autowired
     private AlbumsDAO albumsDAO;
-    
+
     @Autowired
     private LoginDAO loginDAO;
 
@@ -57,8 +61,10 @@ public class Login {
                 List<com.models.Product> listPro = productDAO.findAll();
                 model.addAttribute("listPro", listPro);
                 model.addAttribute("login", loggedInUser);
-                List<Albums> albums = albumsDAO.findAllAlbums();
-                model.addAttribute("albums", albums);
+                 List<Albums> albumsList = albumsDAO.selectAlbums(phone);
+                model.addAttribute("albums", albumsList);
+                List<com.models.Categories> cate = categoryDAO.findAll();
+                model.addAttribute("cate", cate);
                 return "index";
             }
         } else {
@@ -88,6 +94,25 @@ public class Login {
             return "account";
         }
         return "account";
+    }
+    
+    
+     @GetMapping("home")
+    public String home(HttpSession session, ModelMap model) {
+        com.models.Login login = (com.models.Login) session.getAttribute("login");
+        if (login != null) {
+            List<com.models.Product> listPro = productDAO.findAll();
+            model.addAttribute("listPro", listPro);
+            model.addAttribute("login", login);
+            List<Albums> albumsList = albumsDAO.selectAlbums(login.getPhone());
+            model.addAttribute("albums", albumsList);
+        } else {
+            List<com.models.Product> listPro = productDAO.findAll();
+            model.addAttribute("listPro", listPro);
+            List<com.models.Categories> cate = categoryDAO.findAll();
+            model.addAttribute("cate", cate);
+        }
+        return "index"; // Tên của trang JSP cho trang chủ
     }
 
 }
