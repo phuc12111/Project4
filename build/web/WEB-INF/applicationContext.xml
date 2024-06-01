@@ -35,7 +35,7 @@
     <bean id="chdao" class="com.servlets.CheckoutDAOiml">
         <property name="jdbcTemplate" ref="jdbcTemplate"></property>
     </bean>
-        <bean id="ddao" class="com.servlets.DeliveriesDAOiml">
+    <bean id="ddao" class="com.servlets.DeliveriesDAOiml">
         <property name="jdbcTemplate" ref="jdbcTemplate"></property>
     </bean>
     <bean id="fdao" class="com.servlets.FavouritesDAOiml">
@@ -53,10 +53,13 @@
     <bean id="paddao" class="com.servlets.PayDAOiml">
         <property name="jdbcTemplate" ref="jdbcTemplate"></property>
     </bean>
-     <bean id="abddao" class="com.servlets.AlbumsDAOImpl">
+    <bean id="abddao" class="com.servlets.AlbumsDAOImpl">
         <property name="jdbcTemplate" ref="jdbcTemplate"></property>
     </bean>
-     <bean id="albumddao" class="com.servlets.AlbumdetailsDAOiml">
+    <bean id="albumddao" class="com.servlets.AlbumdetailsDAOiml">
+        <property name="jdbcTemplate" ref="jdbcTemplate"></property>
+    </bean>
+     <bean id="supdao" class="com.servlets.SupplierDAOImpl">
         <property name="jdbcTemplate" ref="jdbcTemplate"></property>
     </bean>
 </beans>
