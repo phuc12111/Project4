@@ -393,24 +393,12 @@
                 <div class="bg_gray">
                     <div class="container margin_30">
                         <div id="brands" class="owl-carousel owl-theme">
-                            <div class="item">
-                                <a href="#0"><img src="img/brands/placeholder_brands.png" data-src="img/brands/logo_1.png" alt="" class="owl-lazy"></a>
-                            </div><!-- /item -->
-                            <div class="item">
-                                <a href="#0"><img src="img/brands/placeholder_brands.png" data-src="img/brands/logo_2.png" alt="" class="owl-lazy"></a>
-                            </div><!-- /item -->
-                            <div class="item">
-                                <a href="#0"><img src="img/brands/placeholder_brands.png" data-src="img/brands/logo_3.png" alt="" class="owl-lazy"></a>
-                            </div><!-- /item -->
-                            <div class="item">
-                                <a href="#0"><img src="img/brands/placeholder_brands.png" data-src="img/brands/logo_4.png" alt="" class="owl-lazy"></a>
-                            </div><!-- /item -->
-                            <div class="item">
-                                <a href="#0"><img src="img/brands/placeholder_brands.png" data-src="img/brands/logo_5.png" alt="" class="owl-lazy"></a>
-                            </div><!-- /item -->
-                            <div class="item">
-                                <a href="#0"><img src="img/brands/placeholder_brands.png" data-src="img/brands/logo_6.png" alt="" class="owl-lazy"></a>
-                            </div><!-- /item --> 
+                            <c:forEach var="sup" items="${listSupplier}" varStatus="status">
+                                <div class="item">
+                                    <a href="#0"><img src="${pageContext.request.contextPath}/${sup.picture}" data-src="${pageContext.request.contextPath}/${sup.picture}" alt="" class="owl-lazy"></a>
+                                </div><!-- /item -->
+                            </c:forEach>
+
                         </div><!-- /carousel -->
                     </div><!-- /container -->
                 </div>
@@ -547,22 +535,22 @@
     <!-- SPECIFIC SCRIPTS -->
     <script src="${pageContext.request.contextPath}/js/carousel-home.min.js"></script>
     <script>
-                                        // Update the selected album ID when a radio button is clicked
-                                        function updateSelectedAlbum(radio) {
-                                            document.getElementById('selectedAlbumID').value = radio.value;
-                                        }
+                                                        // Update the selected album ID when a radio button is clicked
+                                                        function updateSelectedAlbum(radio) {
+                                                            document.getElementById('selectedAlbumID').value = radio.value;
+                                                        }
 
-                                        // Show the add album form
-                                        function showAddAlbumForm(productID) {
-                                            document.getElementById('addAlbumModal').style.display = "block";
-                                            // Set the product ID in the hidden input field
-                                            document.getElementById('selectedProductID').value = productID;
-                                        }
+                                                        // Show the add album form
+                                                        function showAddAlbumForm(productID) {
+                                                            document.getElementById('addAlbumModal').style.display = "block";
+                                                            // Set the product ID in the hidden input field
+                                                            document.getElementById('selectedProductID').value = productID;
+                                                        }
 
-                                        // Close the add album form
-                                        function closeAddAlbumForm() {
-                                            document.getElementById('addAlbumModal').style.display = "none";
-                                        }
+                                                        // Close the add album form
+                                                        function closeAddAlbumForm() {
+                                                            document.getElementById('addAlbumModal').style.display = "none";
+                                                        }
     </script>
 </body>
 </html>
