@@ -20,18 +20,12 @@
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/E:/Project_4/Project4New/Project4/src/java/com/controllers/ViewOrderDetailController.java</file>
-            <file>file:/E:/Project_4/Project4New/Project4/src/java/com/controllers/ArtistController.java</file>
-            <file>file:/E:/Project_4/Project4New/Project4/web/WEB-INF/jsp/order_deatail_pro.jsp</file>
-            <file>file:/E:/Project_4/Project4New/Project4/src/java/com/controllers/CheckOutController.java</file>
-            <file>file:/E:/Project_4/Project4New/Project4/web/WEB-INF/jsp/order_deatail.jsp</file>
-            <file>file:/E:/Project_4/Project4New/Project4/src/java/com/models/Orders.java</file>
-            <file>file:/E:/Project_4/Project4New/Project4/src/java/com/models/PurchasingInvoices.java</file>
-            <file>file:/E:/Project_4/Project4New/Project4/src/java/com/servlets/ViewOrderDAO.java</file>
-            <file>file:/E:/Project_4/Project4New/Project4/src/java/com/servlets/ProductDAOiml.java</file>
-            <file>file:/E:/Project_4/Project4New/Project4/web/WEB-INF/jsp/cart.jsp</file>
-            <file>file:/E:/Project_4/Project4New/Project4/src/java/com/servlets/ViewOrderDAOiml.java</file>
-            <file>file:/E:/Project_4/Project4New/Project4/src/java/com/models/OrderDeatail.java</file>
+            <file>file:/C:/_aptech/_projectjava/project/project4-new05/Project4/src/java/com/servlets/AlbumReviewDAOImpl.java</file>
+            <file>file:/C:/_aptech/_projectjava/project/project4-new05/Project4/src/java/com/servlets/CheckoutDAOiml.java</file>
+            <file>file:/C:/_aptech/_projectjava/project/project4-new05/Project4/src/java/com/controllers/CheckOutController.java</file>
+            <file>file:/C:/_aptech/_projectjava/project/project4-new05/Project4/src/java/com/servlets/CheckoutDAO.java</file>
+            <file>file:/C:/_aptech/_projectjava/project/project4-new05/Project4/src/java/com/models/Orders.java</file>
+            <file>file:/C:/_aptech/_projectjava/project/project4-new05/Project4/src/java/com/controllers/AlbumsController.java</file>
         </group>
     </open-files>
 </project-private>

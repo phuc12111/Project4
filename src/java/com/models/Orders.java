@@ -23,7 +23,7 @@ public class Orders {
     private int deliveryID;
     private String phone;
 
-    public Orders(int orderID, LocalDate orderDate, Timestamp deliveryDate, String shipAddress, String status, double total, int paymentID, int deliveryID, String phone) {
+    public Orders(int orderID, LocalDate  orderDate, Timestamp deliveryDate, String shipAddress, String status, double total, int paymentID, int deliveryID, String phone) {
         this.orderID = orderID;
         this.orderDate = orderDate;
         this.deliveryDate = deliveryDate;
@@ -46,11 +46,11 @@ public class Orders {
         this.orderID = orderID;
     }
 
-    public LocalDate getOrderDate() {
+    public LocalDate  getOrderDate() {
         return orderDate;
     }
 
-    public void setOrderDate(LocalDate orderDate) {
+    public void setOrderDate(LocalDate  orderDate) {
         this.orderDate = orderDate;
     }
 

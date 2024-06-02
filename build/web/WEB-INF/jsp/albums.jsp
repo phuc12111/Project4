@@ -136,6 +136,7 @@
                                         <th>Album Name</th>
                                         <th></th>
                                         <th></th>
+                                        <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -143,9 +144,11 @@
 
                                         <tr>
                                             <td>
-
                                                 <span class="item_cart">${alb.albumName}</span>
                                             </td>   
+                                            <td> 
+                                                <a type="submit" class="btn btn-primary" href="${pageContext.request.contextPath}/albums/review/${login.phone}/${alb.albumID}.htm">Review</a>
+                                            </td>
                                             <td> 
                                                 <a type="submit" class="btn btn-primary" href="${pageContext.request.contextPath}/albums/viewProducts/${alb.albumID}.htm">Details</a>
                                             </td>

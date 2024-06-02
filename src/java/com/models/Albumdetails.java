@@ -9,9 +9,10 @@ package com.models;
  * @author asus
  */
 public class Albumdetails {
+
     private int albumID;
     private int productID;
-  private String description;
+    private String description;
     private String productName;
 
     public Albumdetails(int albumID, int productID, String description, String productName, double price, String audioFile) {
@@ -48,13 +49,10 @@ public class Albumdetails {
     }
     private double price;
     private String audioFile;
-    public Albumdetails() {
-        
-    }
 
-    
-    
-    
+    public Albumdetails() {
+
+    }
 
     public int getAlbumID() {
         return albumID;
@@ -79,5 +77,5 @@ public class Albumdetails {
     public void setDescription(String description) {
         this.description = description;
     }
-   
+
 }

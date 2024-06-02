@@ -59,12 +59,13 @@
     <bean id="albumddao" class="com.servlets.AlbumdetailsDAOiml">
         <property name="jdbcTemplate" ref="jdbcTemplate"></property>
     </bean>
-     <bean id="supdao" class="com.servlets.SupplierDAOImpl">
+    <bean id="supdao" class="com.servlets.SupplierDAOImpl">
         <property name="jdbcTemplate" ref="jdbcTemplate"></property>
     </bean>
-    
-     <bean id="artdao" class="com.servlets.ArtistDAOiml">
+    <bean id="artdao" class="com.servlets.ArtistDAOiml">
         <property name="jdbcTemplate" ref="jdbcTemplate"></property>
     </bean>
-    
+    <bean id="albumreviewdao" class="com.servlets.AlbumReviewDAOImpl">
+        <property name="jdbcTemplate" ref="jdbcTemplate"></property>
+    </bean>
 </beans>
