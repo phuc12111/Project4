@@ -160,42 +160,32 @@
                             <table class="table text-start align-middle table-bordered table-hover mb-0">
                                 <thead>
                                     <tr class="text-white">
-                                        <th scope="col">OrderID</th>
-                                        <th scope="col">Order Date</th>
-                                        <th scope="col">Delivery Date</th>
-                                        <th scope="col">ShipAddress</th>
-                                        <th scope="col">Status</th>
-                                        <th scope="col">PaymentName</th>
-                                        <th scope="col">Delivery ID</th>
-                                        <th scope="col">Phone</th>
-                                        <th scope="col">Product ID</th>
-                                        <th scope="col">price</th>
-                                        <th scope="col">quantity</th>
-                                        <th scope="col">Delete</th>
-                                        <th scope="col">Update</th>
+                                        <th>Order Date</th>
+                                        <th>Delivery Date</th>
+                                        <th>Status</th>
+                                        <th>Total</th>
+                                        <th>Actions</th>
+                                        <th scope="col">Accept order</th>
+                                        <th scope="col">Cancel order</th>
                                     </tr>
                                 </thead>
                                 <tbody>
 
                                     <c:forEach items="${order}" var="order"><tr>
-                                            <td>${order.orderID}</td>
-                                            <td>${order.orderDate}</td>
-                                            <td>${order.deliveryDate}</td>
-                                            <td>${order.shipAddress}</td>
-                                            <td>${order.status}</td>
-                                            <td>${order.paymentID}</td>
-                                            <td>${order.deliveryID}</td>
-                                            <td>${order.phone}</td>
-                                            <td>${order.productID}</td>
-                                            <td>${order.price}</td>
-                                            <td>${order.quantity}</td>
-                                            <td>
-                                                <a class="btn btn-sm btn-primary" href="${pageContext.request.contextPath}/order/delete/${order.orderID}.htm">Delete</a>
-                                            </td>
+                                            <td><strong>${order.orderDate}</strong></td>
+                                            <td><strong>${order.deliveryDate}</strong></td>
+                                            <td><strong>${order.status}</strong></td>
+                                            <td><strong>${order.total}</strong></td>
+                                            <td><a class="btn btn-sm btn-primary" href="${pageContext.request.contextPath}/order/detailproad/${order.orderID}.htm">View Detail</a></td>
+                                            <c:if test="${order.status == 'Wait for confirmation'}">
+                                                <td>
+                                                    <a class="btn btn-sm btn-primary" href="${pageContext.request.contextPath}/order/updateStatus/${order.orderID}.htm">Accept</a>
+                                                </td>
+                                                <td>
+                                                    <a class="btn btn-sm btn-primary" href="${pageContext.request.contextPath}/order/updateStatuscancel/${order.orderID}.htm">Cancel</a>
+                                                </td>
+                                            </c:if>
 
-                                            <td>
-                                                <a class="btn btn-sm btn-primary" href="${pageContext.request.contextPath}/order/showupdate/${order.orderID}.htm">Update</a>
-                                            </td>
 
                                         </tr>
                                     </c:forEach>

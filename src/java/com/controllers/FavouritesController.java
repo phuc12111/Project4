@@ -1,11 +1,13 @@
 package com.controllers;
 
+import com.models.Categories;
 import com.models.Favouritead;
 import com.models.Favourites;
 import com.models.FavouritesMember;
 import com.models.Login;
 import com.models.Product;
 import com.servlets.CartDAO;
+import com.servlets.CategoryDAO;
 import com.servlets.FavouritesDAO;
 import com.servlets.LoginDAO;
 import com.servlets.ProductDAO;
@@ -37,6 +39,9 @@ public class FavouritesController {
     @Autowired
     private CartDAO cartDAO;
 
+    @Autowired
+    private CategoryDAO categoryDAO;
+
     @RequestMapping(value = "add/{productID}/{phone}", method = RequestMethod.GET)
     public String addFavourite(ModelMap mm, HttpSession session,
             @PathVariable("productID") int productID,
@@ -44,7 +49,8 @@ public class FavouritesController {
 
         Login user = loginDAO.findByUser(phone);
         Product product = cartDAO.findById(productID);
-
+        List<com.models.Categories> cate = categoryDAO.findAll();
+        mm.addAttribute("cate", cate);
         // Create and set values for Favourites object
         Favourites favourites = new Favourites();
         favourites.setProductName(product.getProductName());
@@ -72,6 +78,8 @@ public class FavouritesController {
                 List<Favourites> favouritesList = favouritesDAO.selectFavourites(phone);
                 mm.addAttribute("favouritesList", favouritesList);
                 session.setAttribute("login", user);
+                List<com.models.Categories> cate = categoryDAO.findAll();
+                mm.addAttribute("cate", cate);
                 return "favourites";
             }
         } catch (EmptyResultDataAccessException e) {
@@ -105,24 +113,21 @@ public class FavouritesController {
 
         List<FavouritesMember> listfa = favouritesDAO.get();
         mm.addAttribute("listfa", listfa);
-        
+
         List<Favouritead> faadmin = favouritesDAO.getTopFavourites();
         mm.addAttribute("faadmin", faadmin);
-        
+
         return "favouritesad";
 
     }
 
-    
-    
     @RequestMapping(value = "editFavouriteForm", method = RequestMethod.GET)
     public String showEditFavouriteForm(@RequestParam("favouriteID") String id, ModelMap mm) {
         Favourites favourite = favouritesDAO.getbyid(id);
         mm.addAttribute("favourite", favourite);
         return "edit_favourites";
     }
-    
-    
+
     @RequestMapping(value = "updateFavourite", method = RequestMethod.POST)
     public String updateFavourite(@ModelAttribute("favourite") Favourites favourite, ModelMap mm) {
         favouritesDAO.update(favourite);
@@ -132,12 +137,12 @@ public class FavouritesController {
     }
 
     @RequestMapping(value = "deleteFavourite/{favouriteID}", method = RequestMethod.GET)
-public String deleteFavourite(@PathVariable("favouriteID") int favouriteID, ModelMap mm) {
-    favouritesDAO.delete(favouriteID);
-    List<FavouritesMember> listfa = favouritesDAO.get();
-    mm.addAttribute("listfa", listfa);
-    return "favouritesad";
-}
+    public String deleteFavourite(@PathVariable("favouriteID") int favouriteID, ModelMap mm) {
+        favouritesDAO.delete(favouriteID);
+        List<FavouritesMember> listfa = favouritesDAO.get();
+        mm.addAttribute("listfa", listfa);
+        return "favouritesad";
+    }
 
     @RequestMapping(value = "searchFavourites", method = RequestMethod.GET)
     public String searchFavourites(@RequestParam("productName") String productName, ModelMap mm) {
@@ -151,6 +156,52 @@ public String deleteFavourite(@PathVariable("favouriteID") int favouriteID, Mode
         return new Favourites();
     }
 
-    
-    
+    @RequestMapping(value = "addcate/{productID}/{phone}/{categoryID}", method = RequestMethod.GET)
+    public String addFavouritecate(ModelMap mm, HttpSession session,
+            @PathVariable("productID") int productID,
+            @PathVariable("categoryID") int categoryID,
+            @PathVariable("phone") String phone) {
+
+        // Fetch user by phone
+        Login user = loginDAO.findByUser(phone);
+        if (user == null) {
+            mm.addAttribute("message", "User not found!");
+            return "error"; // Return an error view or appropriate response
+        }
+
+        // Fetch product by ID
+        Product product = cartDAO.findById(productID);
+        if (product == null) {
+            mm.addAttribute("message", "Product not found!");
+            return "error"; // Return an error view or appropriate response
+        }
+
+        // Create and set values for Favourites object
+        Favourites favourites = new Favourites();
+        favourites.setProductName(product.getProductName());
+        favourites.setPrice(product.getPrice());
+        favourites.setPicture(product.getPicture());
+        favourites.setPhone(user.getPhone());
+        favourites.setProductID(productID);
+
+        // Save the favourite
+        favouritesDAO.createFavourites(favourites);
+
+        // Add attributes to model
+        List<Product> listPro = productDAO.findAll();
+        mm.addAttribute("listPro", listPro);
+        mm.addAttribute("message", "Favourite added successfully!");
+
+        List<Product> pro = categoryDAO.findAllpro(categoryID);
+        mm.addAttribute("pro", pro);
+
+        List<Categories> cate = categoryDAO.findAll();
+        mm.addAttribute("cate", cate);
+
+        Categories catedal = categoryDAO.findById(categoryID);
+        mm.addAttribute("catedal", catedal);
+
+        return "detailCategory";
+    }
+
 }

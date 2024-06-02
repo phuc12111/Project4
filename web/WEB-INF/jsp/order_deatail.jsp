@@ -64,6 +64,8 @@
                                         <th>Status</th>
                                         <th>Total</th>
                                         <th>Actions</th>
+                                        <th>Complete</th>
+                                        <th>Cancel order</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -73,15 +75,24 @@
                                             <td><strong>${order.deliveryDate}</strong></td>
                                             <td><strong>${order.status}</strong></td>
                                             <td><strong>${order.total}</strong></td>
-                                            <td><a href="${pageContext.request.contextPath}/order/detailpro/${order.orderID}.htm">xem chi tiết</a></td>
-                                            <td>
-                                                <c:if test="${order.shipAddress == 'HCM'}">
-                                                    <form action="${pageContext.request.contextPath}/rate" method="post">
-                                                        <input type="hidden" name="orderId" value="${order.id}" />
-                                                        <button type="submit">Rate</button>
-                                                    </form>
-                                                </c:if>
-                                            </td>
+                                            <td><a class="btn btn-sm btn-primary" href="${pageContext.request.contextPath}/order/detailpro/${order.orderID}.htm">View order detail</a></td>
+                                            <c:choose>
+                                                <c:when test="${order.status != 'The seller confirmed the cancellation' && order.status != 'User confirms cancellation' && order.status != 'has received the goods'}">
+                                                    <c:if test="${order.status == 'Confirmed'}">
+                                                        <td>
+                                                            <a class="btn btn-sm btn-primary" href="${pageContext.request.contextPath}/order/updateStatusok/${order.orderID}.htm">Complete</a>
+                                                        </td>
+                                                    </c:if>
+                                                    <td>
+                                                        <a class="btn btn-sm btn-primary" href="${pageContext.request.contextPath}/order/updateStatuscanceluser/${order.orderID}.htm">Cancel order</a>
+                                                    </td>
+                                                </c:when>
+                                                <c:when test="${order.status == 'has received the goods'}">
+                                                    <td>
+                                                        <a class="btn btn-sm btn-primary" href="${pageContext.request.contextPath}/order/reviewProduct/${order.orderID}.htm">Review Product</a>
+                                                    </td>
+                                                </c:when>
+                                            </c:choose>
                                         </tr>
                                     </c:forEach>
                                 </tbody>

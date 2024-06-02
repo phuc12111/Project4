@@ -6,6 +6,7 @@ import com.models.Supplier;
 import com.servlets.AlbumdetailsDAOiml;
 import com.servlets.AlbumsDAO;
 import com.servlets.CategoryDAO;
+import com.servlets.LoginDAO;
 import com.servlets.ProductDAO;
 import com.servlets.SupplierDAO;
 import java.util.HashMap;
@@ -30,8 +31,11 @@ public class Index {
     private CategoryDAO categoryDAO;
 
     @Autowired
+    private LoginDAO loginDAO;
+
+    @Autowired
     private AlbumsDAO albumsDAO;
-    
+
     @Autowired
     private SupplierDAO supplierDAO;
 
@@ -39,19 +43,24 @@ public class Index {
     private AlbumdetailsDAOiml albumdetailsDAOiml;
 
     @RequestMapping(value = "index", method = RequestMethod.GET)
-    public String showShipper(ModelMap model) {
+    public String showShipper(ModelMap model, HttpSession session) {
+        com.models.Login sessionLogin = (com.models.Login) session.getAttribute("login");
+        if (sessionLogin != null) {
+            String phone = sessionLogin.getPhone();
+            com.models.Login login = loginDAO.findByUser(phone);
+            List<Albums> albumsList = albumsDAO.selectAlbums(phone);
+            model.addAttribute("albums", albumsList);
+        }
         List<com.models.Product> listPro = productDAO.findAll();
         model.addAttribute("listPro", listPro);
-        
+
         List<Supplier> listSupplier = supplierDAO.findAll();
         model.addAttribute("listSupplier", listSupplier);
 
         List<com.models.Categories> cate = categoryDAO.findAll();
         model.addAttribute("cate", cate);
         return "index";
-        
-        
-        
+
     }
 
 }

@@ -268,6 +268,11 @@ public class ViewOrderDAOiml implements ViewOrderDAO {
         return jdbcTemplate.query(sql, new Object[]{phone}, new BeanPropertyRowMapper<>(Orders.class));
     }
     
+     @Override
+    public List<Orders> getAllOr() {
+        String sql = "SELECT * FROM orders";
+        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Orders.class));
+    }
     
    @Override
 public List<PurchasingInvoices> getAllPur(int orderID) {
@@ -290,4 +295,31 @@ public List<PurchasingInvoices> getAllPur(int orderID) {
     });
 }
 
+
+
+
+@Override
+public void UpdateStatusGET(int orderID) {
+    String updateQuantitySql = "UPDATE orders SET status = 'Confirmed' WHERE orderID = ?";
+    jdbcTemplate.update(updateQuantitySql, orderID);
+}
+
+@Override
+public void UpdateStatusCANECL(int orderID) {
+    String updateQuantitySql = "UPDATE orders SET status = 'The seller confirmed the cancellation' WHERE orderID = ?";
+    jdbcTemplate.update(updateQuantitySql, orderID);
+}
+
+@Override
+public void UpdateStatusCAUSER(int orderID) {
+    String updateQuantitySql = "UPDATE orders SET status = 'User confirms cancellation' WHERE orderID = ?";
+    jdbcTemplate.update(updateQuantitySql, orderID);
+}
+
+
+@Override
+public void UpdateStatusOK(int orderID) {
+    String updateQuantitySql = "UPDATE orders SET status = 'has received the goods' WHERE orderID = ?";
+    jdbcTemplate.update(updateQuantitySql, orderID);
+}
 }

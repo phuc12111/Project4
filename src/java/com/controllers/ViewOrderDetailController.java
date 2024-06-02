@@ -69,10 +69,24 @@ public class ViewOrderDetailController {
     @RequestMapping(value = "orderde", method = RequestMethod.GET)
     public String viewOrder(ModelMap mm, HttpSession session) {
 
-        List<OrderDeatail> order = viewOrderDAO.getAllOrderDetails();
+        List<Orders> order = viewOrderDAO.getAllOr();
         mm.addAttribute("order", order);
         return "orderad";
     }
+    
+    
+    
+    @RequestMapping(value = "detailproad/{orderID}", method = RequestMethod.GET)
+    public String viewOrderDetailProAdmin(@PathVariable("orderID") int orderID, ModelMap mm, HttpSession session) {
+
+ 
+
+        List<PurchasingInvoices> orderDetails = viewOrderDAO.getAllPur(orderID);
+        mm.addAttribute("orderDetails", orderDetails);
+        return "orderad_pro";  
+
+    }
+
 
     @RequestMapping(value = "delete/{orderID}", method = RequestMethod.GET)
     public String deleteOrderDetail(@PathVariable("orderID") int orderID, ModelMap mm) {
@@ -121,5 +135,46 @@ public class ViewOrderDetailController {
         List<OrderDeatail> order = viewOrderDAO.getAllOrderDetails();
         model.addAttribute("order", order);
         return "orderad";
+    }
+    
+    
+    
+    @RequestMapping(value = "updateStatus/{orderID}", method = RequestMethod.GET)
+    public String updateOrderStatus(@PathVariable("orderID") int orderID, ModelMap mm) {
+        viewOrderDAO.UpdateStatusGET(orderID);
+        mm.addAttribute("message", "Order status updated successfully!");
+         List<Orders> order = viewOrderDAO.getAllOr();
+        mm.addAttribute("order", order);
+        return "orderad"; 
+    }
+    
+    @RequestMapping(value = "updateStatuscancel/{orderID}", method = RequestMethod.GET)
+    public String updateOrderStatuscancel(@PathVariable("orderID") int orderID, ModelMap mm) {
+        viewOrderDAO.UpdateStatusCANECL(orderID);
+        mm.addAttribute("message", "Order status updated successfully!");
+         List<Orders> order = viewOrderDAO.getAllOr();
+        mm.addAttribute("order", order);
+        return "orderad"; 
+    }
+    
+    
+     @RequestMapping(value = "updateStatuscanceluser/{orderID}", method = RequestMethod.GET)
+    public String updateOrderStatuscanceluser(@PathVariable("orderID") int orderID, ModelMap mm) {
+        viewOrderDAO.UpdateStatusCAUSER(orderID);
+        mm.addAttribute("message", "Order status updated successfully!");
+         List<Orders> order = viewOrderDAO.getAllOr();
+        mm.addAttribute("order", order);
+        return "orderad"; 
+    }
+    
+    
+      @RequestMapping(value = "updateStatusok/{orderID}", method = RequestMethod.GET)
+    public String updateOrderStatusok(@PathVariable("orderID") int orderID, ModelMap mm) {
+        viewOrderDAO.UpdateStatusOK(orderID);
+        mm.addAttribute("message", "Thank you!");
+         List<Orders> order = viewOrderDAO.getAllOr();
+        mm.addAttribute("order", order);
+        
+        return "index"; 
     }
 }

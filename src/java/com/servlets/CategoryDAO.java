@@ -16,4 +16,5 @@ import java.util.List;
 public interface CategoryDAO {
     public List<Categories> findAll();
     public List<Product> findAllpro(int categoryID);
+    public Categories findById(int categoryID);
 }

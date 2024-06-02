@@ -6,11 +6,14 @@ package com.servlets;
 
 import com.models.Categories;
 import com.models.Product;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 
 /**
  *
@@ -44,6 +47,22 @@ public class CategoryDAOiml implements CategoryDAO{
         }
         return cate;
     }
+    
+    @Override
+     public Categories findById(int categoryID) {
+        String sql = "select * from categories where categoryID = ?";
+        return jdbcTemplate.queryForObject(sql, new Object[]{categoryID}, new RowMapper<Categories>() {
+            @Override
+            public Categories mapRow(ResultSet rs, int rowNum) throws SQLException {
+                Categories category = new Categories();
+                category.setCategoryID(rs.getInt("categoryID"));
+                category.setCategoryName(rs.getString("categoryName"));
+                category.setDescription(rs.getString("description"));
+                return category;
+            }
+        });
+    }
+    
     
      @Override
 public List<Product> findAllpro(int categoryID) {
