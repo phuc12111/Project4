@@ -1,15 +1,18 @@
 package com.controllers;
 
+import com.models.AlbumReview;
 import com.models.Albumdetails;
 import com.models.Albums;
 import com.models.Favourites;
 import com.models.Product;
+import com.servlets.AlbumReviewDAO;
 import com.servlets.AlbumdetailsDAO;
 import com.servlets.AlbumdetailsDAOiml;
 import com.servlets.AlbumsDAO;
 import com.servlets.CategoryDAO;
 import com.servlets.LoginDAO;
 import com.servlets.ProductDAO;
+import java.sql.Timestamp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,6 +34,9 @@ public class AlbumsController {
     private ProductDAO productsDAO;
     @Autowired
     private AlbumsDAO albumsDAO;
+
+    @Autowired
+    private AlbumReviewDAO albumReviewDAO;
 
     @Autowired
     private LoginDAO loginDAO;
@@ -173,4 +179,35 @@ public class AlbumsController {
         return "albumsde"; // Tên của trang JSP để hiển thị danh sách sản phẩm
     }
 
+    @RequestMapping(value = "review/{phone}/{albumID}", method = RequestMethod.GET)
+    public String viewAlbumReview(@ModelAttribute("albumReview") AlbumReview albumReview, @PathVariable("phone") String phone, HttpSession session, @PathVariable("albumID") int albumID, ModelMap model) {
+
+//        List<Albums> albumsByPhone = albumsDAO.selectAlbums(phone);
+//        model.addAttribute("albumsByPhone", albumsByPhone);
+
+        Albums albumsByID = albumsDAO.findAlbumById(albumID);
+        model.addAttribute("albumsByID", albumsByID);
+
+        model.addAttribute("albumReview", albumReview);
+
+        return "albumReviewadd"; // Tên của trang JSP để hiển thị danh sách sản phẩm
+    }
+
+    @RequestMapping(value = "review/add/{phone}/{albumID}", method = RequestMethod.POST)
+    public String addAlbumReview(@ModelAttribute("albumReview") AlbumReview albumReview, @PathVariable("phone") String phone, HttpSession session, @PathVariable("albumID") int albumID, ModelMap model) {
+
+        albumReview.setContent(albumReview.getContent());
+        albumReview.setNumberStars(albumReview.getNumberStars());
+        
+        Timestamp tms = new Timestamp(System.currentTimeMillis());
+        albumReview.setCreatedAt(tms.toString());
+        
+        
+        albumReview.setPhone(phone);
+        albumReview.setAlbumID(albumID);
+
+        albumReviewDAO.add(albumReview);
+
+        return "albums"; // Tên của trang JSP để hiển thị danh sách sản phẩm
+    }
 }

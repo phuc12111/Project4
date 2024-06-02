@@ -35,28 +35,26 @@ public class CheckOutController {
             @RequestParam("total") double total,
             @RequestParam("phone") String phone) {
 
-       
         HashMap<Integer, Cart> cartItems = (HashMap<Integer, Cart>) session.getAttribute("myCartItems");
         if (cartItems == null || cartItems.isEmpty()) {
             mm.addAttribute("error", "Your cart is empty.");
             return "error";
         }
 
-        
         if (shipAddress == null || shipAddress.isEmpty() || phone == null || phone.isEmpty()) {
             mm.addAttribute("error", "Invalid input parameters.");
             return "error";
         }
 
-        
         Orders order = new Orders();
         
-       LocalDate today = LocalDate.now();
+        LocalDate today = LocalDate.now();
         order.setOrderDate(today);
-
+        
         Calendar deliveryCalendar = Calendar.getInstance();
-        deliveryCalendar.add(Calendar.DATE, 3); 
+        deliveryCalendar.add(Calendar.DATE, 3);
         order.setDeliveryDate(new Timestamp(deliveryCalendar.getTimeInMillis()));
+
         order.setShipAddress(shipAddress);
         order.setPhone(phone);
         order.setTotal(total);
@@ -64,7 +62,6 @@ public class CheckOutController {
         order.setDeliveryID(deliveryID);
         order.setStatus("Wait for confirmation");
 
-        
         int orderId = checkoutDAO.createOrder(order);
         List<PurchasingInvoices> purchasingInvoicesList = new ArrayList<>();
         for (Map.Entry<Integer, Cart> entry : cartItems.entrySet()) {

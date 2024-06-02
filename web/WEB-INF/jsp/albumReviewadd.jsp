@@ -110,91 +110,63 @@
                         <div class="breadcrumbs">
                             <ul>
                                 <li><a href="#">Home</a></li>
-                                <li><a href="#">Category</a></li>
                                 <li>Albums</li>
+                                <li>Review</li>
                             </ul>
                         </div>
-                        <c:choose>
-                            <c:when test="${empty login}">
-                                <h1>Album page</h1>
-                            </c:when>
-                            <c:otherwise>
-                                <h1>Album page of ${login.memberName}</h1>
-                            </c:otherwise>
-                        </c:choose>
-                    </div>
-                    <h1>${successfully}</h1>
-                    <c:choose>
-                        <c:when test="${not empty message}">
-                            <h1>${message}</h1>
-                        </c:when>
 
-                        <c:otherwise>
-                            <table class="table table-striped cart-list">
-                                <thead>
-                                    <tr>
-                                        <th>Album Name</th>
-                                        <th></th>
-                                        <th></th>
-                                        <th></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <c:forEach var="alb" items="${albumsList}">
+                        <!--                        <form action="${pageContext.request.contextPath}/albums/add.htm" method="post">
+                            <div class="form-group">
+                                <input type="text" class="form-control" name="content" id="content" placeholder="Content*">
+                            </div>
+                            
+                            <div class="text-center"><input type="submit" value="Send Review" class="btn_1 full-width"></div>
+                        </form>-->
+                        
+                        <h3 class="client">Review Album</h3>
+                                <div class="form_container">
+                                    <div class="row no-gutters">
 
-                                        <tr>
-                                            <td>
-                                                <span class="item_cart">${alb.albumName}</span>
-                                            </td>   
-                                            <td> 
-                                                <a type="submit" class="btn btn-primary" href="${pageContext.request.contextPath}/albums/review/${login.phone}/${alb.albumID}.htm">Review</a>
-                                            </td>
-                                            <td> 
-                                                <a type="submit" class="btn btn-primary" href="${pageContext.request.contextPath}/albums/viewProducts/${alb.albumID}.htm">Details</a>
-                                            </td>
-                                            <td>
-                                                <a type="submit" class="btn btn-primary" href="${pageContext.request.contextPath}/albums/delete/${login.phone}/${alb.albumID}.htm">Delete</a>
-                                            </td>    
-                                        </tr>  
-
-                                    </c:forEach>
-                                </tbody>
-                            </table>
-                        </c:otherwise>
-                    </c:choose>
-
-                    <div class="d-flex align-items-center justify-content-between mb-4">
-
-                        <button class="btn btn-primary" onclick="showAddAlbumForm()">Add Album</button>
-                    </div>
-
-                    <div id="addAlbumModal" class="modal">
-                        <div class="modal-content">
-                            <span class="close" onclick="closeAddAlbumForm()">&times;</span>
-                            <h6 class="mb-0">Add Album</h6>
-                            <form id="addAlbumForm" action="${pageContext.request.contextPath}/albums/add.htm" method="post">
-
-
-                                <div class="form-group row">
-                                    <label for="albumName" class="col-sm-2 col-form-label">Album Name:</label>
-                                    <div class="col-sm-10">
-                                        <input type="text" class="form-control" id="albumName" name="albumName" required>
                                     </div>
+                                    <form action="${pageContext.request.contextPath}/albums/review/add/${login.phone}/${albumsByID.albumID}.htm" method="post">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" name="content" id="content" placeholder="Content*">
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="int" class="form-control" name="numberStars" id="numberStars" value="" placeholder="1-5">
+                                        </div>
+                                        <div class="text-center"><input type="submit" value="Send Review" class="btn_1 full-width"></div>
+                                    </form>
+
                                 </div>
-                                <div class="form-group row">
 
-                                    <div class="col-sm-10">
+<!--                        <div id="addAlbumModal" class="modal">
+                            <div class="modal-content">
+                                <span class="close" onclick="closeAddAlbumForm()">&times;</span>
+                                <h6 class="mb-0">Add Album</h6>
+                                <form id="addAlbumForm" action="" method="post">
 
-                                        <input type="hidden" class="form-control" id="phone" value="${login.phone}" name="phone" required>
+
+                                    <div class="form-group row">
+                                        <label for="albumName" class="col-sm-2 col-form-label">Album Name:</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" id="albumName" name="albumName" required>
+                                        </div>
                                     </div>
-                                </div>
-                                <button type="submit" class="btn btn-primary">Add Album</button>
+                                    <div class="form-group row">
 
-                            </form>
-                        </div>
+                                        <div class="col-sm-10">
+
+                                            <input type="hidden" class="form-control" id="phone" value="" name="phone" required>
+                                        </div>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Add Album</button>
+
+                                </form>
+                            </div>
+                        </div>-->
                     </div>
-                </div>
-                <!-- /container -->
+                    <!-- /container -->
             </main>
             <!--/main-->
 
@@ -209,13 +181,13 @@
         <script src="${pageContext.request.contextPath}/js/common_scripts.min.js"></script>
         <script src="${pageContext.request.contextPath}/js/main.js"></script>
         <script>
-                                // Show the add album form
-                                function showAddAlbumForm() {
-                                    document.getElementById('addAlbumModal').style.display = "block";
-                                }
-                                function closeAddAlbumForm() {
-                                    document.getElementById('addAlbumModal').style.display = "none";
-                                }
+                                    // Show the add album form
+                                    function showAddAlbumForm() {
+                                        document.getElementById('addAlbumModal').style.display = "block";
+                                    }
+                                    function closeAddAlbumForm() {
+                                        document.getElementById('addAlbumModal').style.display = "none";
+                                    }
 
         </script>
 
