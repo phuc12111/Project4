@@ -5,6 +5,7 @@ import com.models.Deliveries;
 import com.models.Payment;
 import com.models.Product;
 import com.servlets.CartDAO;
+import com.servlets.CategoryDAO;
 import com.servlets.DeliveriesDAO;
 import com.servlets.LoginDAO;
 import com.servlets.PayDAO;
@@ -36,6 +37,9 @@ public class ControllerCart {
 
     @Autowired
     private PayDAO payDAO;
+    
+     @Autowired
+    private CategoryDAO categoryDAO;
 
     @RequestMapping(value = "add/{productID}", method = RequestMethod.GET)
     public String addToCart(ModelMap mm, HttpSession session, @PathVariable("productID") int productID) {
@@ -91,6 +95,8 @@ public class ControllerCart {
         mm.addAttribute("listde", listde);
         List<Payment> pay = payDAO.getAllPayments();
         mm.addAttribute("pay", pay);
+         List<com.models.Categories> cate = categoryDAO.findAll();
+                mm.addAttribute("cate", cate);
         if (sessionLogin != null) {
             String phone = sessionLogin.getPhone();
             com.models.Login login = loginDAO.findByUser(phone);

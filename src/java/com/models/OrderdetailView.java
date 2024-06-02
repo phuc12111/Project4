@@ -11,6 +11,7 @@ import java.sql.Timestamp;
  * @author asus
  */
 public class OrderdetailView {
+
     private int orderID;
     private Timestamp orderDate;
     private Timestamp deliveryDate;
@@ -25,8 +26,9 @@ public class OrderdetailView {
     private String phone;
     private String picture;
     private String memberName;
+    private double total;
 
-    public OrderdetailView(int orderID, Timestamp orderDate, Timestamp deliveryDate, String shipAddress, String status, String paymentName, String deliveryName, String productName, int productID, double price, int quantity, String phone, String picture, String memberName) {
+    public OrderdetailView(int orderID, Timestamp orderDate, Timestamp deliveryDate, String shipAddress, String status, String paymentName, String deliveryName, String productName, int productID, double price, int quantity, String phone, String picture, String memberName, double total) {
         this.orderID = orderID;
         this.orderDate = orderDate;
         this.deliveryDate = deliveryDate;
@@ -41,9 +43,8 @@ public class OrderdetailView {
         this.phone = phone;
         this.picture = picture;
         this.memberName = memberName;
+        this.total = total;
     }
-
-    
 
     
 
@@ -161,8 +162,13 @@ public class OrderdetailView {
     public void setMemberName(String memberName) {
         this.memberName = memberName;
     }
-    
-    
-    
-    
+
+    public double getTotal() {
+        return total;
+    }
+
+    public void setTotal(double total) {
+        this.total = total;
+    }
+
 }

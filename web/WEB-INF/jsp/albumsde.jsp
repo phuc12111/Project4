@@ -165,10 +165,6 @@
                         </c:otherwise>
                     </c:choose>
 
-                    <div class="d-flex align-items-center justify-content-between mb-4">
-                        <h6 class="mb-0">Albums</h6>
-                        <button class="btn btn-primary" onclick="showAddAlbumForm()">Add Album</button>
-                    </div>
 
                     <div id="addAlbumModal" class="modal">
                         <div class="modal-content">

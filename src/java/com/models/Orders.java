@@ -6,7 +6,7 @@ package com.models;
 
 import java.sql.Timestamp;
 import java.time.LocalDate;
-import javax.persistence.Column;
+
 
 public class Orders {
 

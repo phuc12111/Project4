@@ -6,7 +6,10 @@ package com.servlets;
 
 import com.models.OrderDeatail;
 import com.models.OrderdetailView;
+import com.models.Orders;
+import com.models.PurchasingInvoices;
 import java.util.List;
+
 
 /**
  *
@@ -25,6 +28,10 @@ public interface ViewOrderDAO {
     public void deleteOrder(int orderID);
 
     public List<OrderDeatail> searchOrdersByPhoneNumber(String phoneNumber);
+
+    public OrderDeatail getOrderDetail(int orderID);
+
+    public List<Orders> getAllOrder(String phone);
+    public List<PurchasingInvoices> getAllPur(int orderID);
     
-    public OrderDeatail getOrderDetail(int orderID) ;
 }

@@ -62,7 +62,7 @@ public class CheckOutController {
         order.setTotal(total);
         order.setPaymentID(status);
         order.setDeliveryID(deliveryID);
-        order.setStatus("unconfimred");
+        order.setStatus("Wait for confirmation");
 
         
         int orderId = checkoutDAO.createOrder(order);

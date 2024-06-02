@@ -6,8 +6,8 @@ package com.models;
 
 import java.sql.Timestamp;
 
-
 public class OrderDeatail {
+
     private int orderID;
     private Timestamp orderDate;
     private Timestamp deliveryDate;
@@ -19,8 +19,9 @@ public class OrderDeatail {
     private int productID;
     private double price;
     private int quantity;
+    private double total;
 
-    public OrderDeatail(int orderID, Timestamp orderDate, Timestamp deliveryDate, String shipAddress, String status, int paymentID, int deliveryID, String phone, int productID, double price, int quantity) {
+    public OrderDeatail(int orderID, Timestamp orderDate, Timestamp deliveryDate, String shipAddress, String status, int paymentID, int deliveryID, String phone, int productID, double price, int quantity, double total) {
         this.orderID = orderID;
         this.orderDate = orderDate;
         this.deliveryDate = deliveryDate;
@@ -32,6 +33,7 @@ public class OrderDeatail {
         this.productID = productID;
         this.price = price;
         this.quantity = quantity;
+        this.total = total;
     }
 
     public OrderDeatail() {
@@ -124,6 +126,13 @@ public class OrderDeatail {
     public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
-    
-}
 
+    public double getTotal() {
+        return total;
+    }
+
+    public void setTotal(double total) {
+        this.total = total;
+    }
+
+}

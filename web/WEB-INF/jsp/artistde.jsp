@@ -114,82 +114,62 @@
                                 <li>Albums</li>
                             </ul>
                         </div>
-                        <c:choose>
-                            <c:when test="${empty login}">
-                                <h1>Album page</h1>
-                            </c:when>
-                            <c:otherwise>
-                                <h1>Album page of ${login.memberName}</h1>
-                            </c:otherwise>
-                        </c:choose>
+                     
+                                <h1>Artwork of  ${as.artistName}</h1>
+                          
                     </div>
                     <h1>${successfully}</h1>
                     <c:choose>
                         <c:when test="${not empty message}">
                             <h1>${message}</h1>
                         </c:when>
-
                         <c:otherwise>
                             <table class="table table-striped cart-list">
                                 <thead>
+                                    <tr><th>Album Details</th></tr>
                                     <tr>
-                                        <th>Album Name</th>
-                                        <th></th>
-                                        <th></th>
+                                        <th>Name </th>
+                                        <th>Picture </th>
+                                        <th>Trailer</th>
+                                        
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <c:forEach var="alb" items="${albumsList}">
+                                    <c:forEach var="pro" items="${products}">
 
-                                        <tr>
-                                            <td>
 
-                                                <span class="item_cart">${alb.albumName}</span>
-                                            </td>   
-                                            <td> 
-                                                <a type="submit" class="btn btn-primary" href="${pageContext.request.contextPath}/albums/viewProducts/${alb.albumID}.htm">Details</a>
+                                        <tr>   
+                                             <td>
+                                                  <span class="new_price" name="productName">${pro.productName}</span>   
+                                                <span class="new_price" name="productName">${pro.productPicture}</span>
+
+
                                             </td>
+                                            
                                             <td>
-                                                <a type="submit" class="btn btn-primary" href="${pageContext.request.contextPath}/albums/delete/${login.phone}/${alb.albumID}.htm">Delete</a>
-                                            </td>    
-                                        </tr>  
 
+                                               
+
+
+                                            </td>
+                                            
+                                            
+                                            <td>
+                                                <span class="new_price" name="trailer">${pro.audioFile}</span>
+
+                                            </td>
+                                           
+
+
+                                        </tr>
                                     </c:forEach>
                                 </tbody>
                             </table>
                         </c:otherwise>
                     </c:choose>
 
-                    <div class="d-flex align-items-center justify-content-between mb-4">
 
-                        <button class="btn btn-primary" onclick="showAddAlbumForm()">Add Album</button>
-                    </div>
-
-                    <div id="addAlbumModal" class="modal">
-                        <div class="modal-content">
-                            <span class="close" onclick="closeAddAlbumForm()">&times;</span>
-                            <h6 class="mb-0">Add Album</h6>
-                            <form id="addAlbumForm" action="${pageContext.request.contextPath}/albums/add.htm" method="post">
-
-
-                                <div class="form-group row">
-                                    <label for="albumName" class="col-sm-2 col-form-label">Album Name:</label>
-                                    <div class="col-sm-10">
-                                        <input type="text" class="form-control" id="albumName" name="albumName" required>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-
-                                    <div class="col-sm-10">
-
-                                        <input type="hidden" class="form-control" id="phone" value="${login.phone}" name="phone" required>
-                                    </div>
-                                </div>
-                                <button type="submit" class="btn btn-primary">Add Album</button>
-
-                            </form>
-                        </div>
-                    </div>
+                    <di
                 </div>
                 <!-- /container -->
             </main>
@@ -210,9 +190,7 @@
                                 function showAddAlbumForm() {
                                     document.getElementById('addAlbumModal').style.display = "block";
                                 }
-                                function closeAddAlbumForm() {
-                                    document.getElementById('addAlbumModal').style.display = "none";
-                                }
+
 
         </script>
 

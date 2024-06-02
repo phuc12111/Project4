@@ -11,6 +11,8 @@ package com.models;
 public class PurchasingInvoices {
     private int orderID;
     private int productID;
+    private String productName;
+    private String picture;
     private double price;
     private int quantity;
 
@@ -46,14 +48,34 @@ public class PurchasingInvoices {
         this.quantity = quantity;
     }
 
-    public PurchasingInvoices(int orderID, int productID, double price, int quantity) {
+    public PurchasingInvoices(int orderID, int productID, String productName, String picture, double price, int quantity) {
         this.orderID = orderID;
         this.productID = productID;
+        this.productName = productName;
+        this.picture = picture;
         this.price = price;
         this.quantity = quantity;
     }
 
+    
+
     public PurchasingInvoices() {
+    }
+
+    public String getProductName() {
+        return productName;
+    }
+
+    public void setProductName(String productName) {
+        this.productName = productName;
+    }
+
+    public String getPicture() {
+        return picture;
+    }
+
+    public void setPicture(String picture) {
+        this.picture = picture;
     }
     
     

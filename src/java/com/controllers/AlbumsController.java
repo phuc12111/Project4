@@ -7,6 +7,7 @@ import com.models.Product;
 import com.servlets.AlbumdetailsDAO;
 import com.servlets.AlbumdetailsDAOiml;
 import com.servlets.AlbumsDAO;
+import com.servlets.CategoryDAO;
 import com.servlets.LoginDAO;
 import com.servlets.ProductDAO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,16 +25,21 @@ import org.springframework.ui.ModelMap;
 @RequestMapping(value = "albums")
 public class AlbumsController {
 
-     @Autowired
-    private ProductDAO productsDAO; 
+    @Autowired
+    private ProductDAO productDAO;
+    @Autowired
+    private ProductDAO productsDAO;
     @Autowired
     private AlbumsDAO albumsDAO;
 
     @Autowired
     private LoginDAO loginDAO;
-    
+
     @Autowired
-    private AlbumdetailsDAO  albumdetailsDAO;
+    private AlbumdetailsDAO albumdetailsDAO;
+
+    @Autowired
+    private CategoryDAO categoryDAO;
 
     @GetMapping("view/{phone}")
     public String viewAllAlbums(ModelMap mm, HttpSession session, @PathVariable("phone") String phone) {
@@ -43,6 +49,8 @@ public class AlbumsController {
                 mm.addAttribute("message", "You are have not yet login!");
                 return "albums"; // Redirect to the favourites page with a message
             } else {
+                List<com.models.Categories> cate = categoryDAO.findAll();
+                mm.addAttribute("cate", cate);
                 List<Albums> albumsList = albumsDAO.selectAlbums(phone);
                 mm.addAttribute("albumsList", albumsList);
                 session.setAttribute("login", user);
@@ -53,15 +61,25 @@ public class AlbumsController {
             return "albums"; // Redirect to the favourites page with an error message
         }
     }
-    
-     @GetMapping("viewdeatail/{albumID}")
-    public String viewDetailAlbums(ModelMap mm, HttpSession session, @PathVariable("albumID") int albumID) {
+
+    @GetMapping("viewdeatail/{albumID}")
+    public String viewDetailAlbums(ModelMap model, HttpSession session, @PathVariable("albumID") int albumID) {
         List<Albumdetails> albumsListde = albumdetailsDAO.selectAlbumDetails(albumID);
-                mm.addAttribute("albumsListde", albumsListde);
-                return "albumsde";
+        model.addAttribute("albumsListde", albumsListde);
+        com.models.Login sessionLogin = (com.models.Login) session.getAttribute("login");
+        if (sessionLogin != null) {
+            String phone = sessionLogin.getPhone();
+            com.models.Login login = loginDAO.findByUser(phone);
+            List<Albums> albumsList = albumsDAO.selectAlbums(phone);
+            model.addAttribute("albumsList", albumsList);
+            model.addAttribute("login", login);
+            List<com.models.Categories> cate = categoryDAO.findAll();
+            model.addAttribute("cate", cate);
+        }
+
+        return "albumsde";
     }
 
-    
     @PostMapping("add")
     public String addAlbum(Model model, @ModelAttribute("album") Albums album, HttpSession session) {
         albumsDAO.addAlbum(album);
@@ -71,29 +89,37 @@ public class AlbumsController {
         if (sessionLogin != null) {
             String phone = sessionLogin.getPhone();
             com.models.Login login = loginDAO.findByUser(phone);
-List<Albums> albumsList = albumsDAO.selectAlbums(phone);
-                model.addAttribute("albumsList", albumsList);
+            List<Albums> albumsList = albumsDAO.selectAlbums(phone);
+            model.addAttribute("albumsList", albumsList);
             model.addAttribute("login", login);
-
+            List<com.models.Categories> cate = categoryDAO.findAll();
+            model.addAttribute("cate", cate);
         }
         return "albums";
     }
 
-    
     @PostMapping("adddetail")
-public String addAlbumDetail(Model model, @ModelAttribute("albumdetails") Albumdetails albumdetails, HttpSession session) {
-    albumdetailsDAO.addAlbumDetails(albumdetails);
+    public String addAlbumDetail(Model model, @ModelAttribute("albumdetails") Albumdetails albumdetails, HttpSession session) {
+        albumdetailsDAO.addAlbumDetails(albumdetails);
 
-    // Retrieve login information from session
-    com.models.Login sessionLogin = (com.models.Login) session.getAttribute("login");
-    if (sessionLogin != null) {
-        String phone = sessionLogin.getPhone();
-        com.models.Login login = loginDAO.findByUser(phone);
-        model.addAttribute("login", login);
+        // Retrieve login information from session
+        com.models.Login sessionLogin = (com.models.Login) session.getAttribute("login");
+        if (sessionLogin != null) {
+            String phone = sessionLogin.getPhone();
+            com.models.Login login = loginDAO.findByUser(phone);
+            List<com.models.Product> listPro = productDAO.findAll();
+            model.addAttribute("listPro", listPro);
+
+            List<Albums> albumsList = albumsDAO.selectAlbums(phone);
+            model.addAttribute("albumsList", albumsList);
+
+            model.addAttribute("login", login);
+
+            List<com.models.Categories> cate = categoryDAO.findAll();
+            model.addAttribute("cate", cate);
+        }
+        return "index"; // Redirect to albums page after adding album details
     }
-    return "index"; // Redirect to albums page after adding album details
-}
-
 
     // Show form to update an existing album
     @GetMapping("/update/{albumID}")
@@ -112,19 +138,21 @@ public String addAlbumDetail(Model model, @ModelAttribute("albumdetails") Albumd
 
     // Delete an album
     @GetMapping("delete/{phone}/{albumID}")
-    public String deleteAlbum(ModelMap mm, @PathVariable("phone") String phone,    @PathVariable("albumID") int albumID) {
-          com.models.Login user = loginDAO.findByUser(phone);
-           if (user == null) {
+    public String deleteAlbum(ModelMap mm, @PathVariable("phone") String phone, @PathVariable("albumID") int albumID) {
+        com.models.Login user = loginDAO.findByUser(phone);
+        if (user == null) {
             mm.addAttribute("message", "User not found. Please log in.");
             return "albums";
         }
-           
+
         albumsDAO.deleteAlbum(albumID);
-         // After deletion, retrieve the updated list of favourites
-         List<Albums> albumsList = albumsDAO.selectAlbums(phone);
+        // After deletion, retrieve the updated list of favourites
+        List<Albums> albumsList = albumsDAO.selectAlbums(phone);
         mm.addAttribute("albumsList", albumsList);
         mm.addAttribute("successfully", "Album item deleted successfully!");
-         
+        List<com.models.Categories> cate = categoryDAO.findAll();
+        mm.addAttribute("cate", cate);
+
         return "albums";
     }
 
@@ -135,15 +163,14 @@ public String addAlbumDetail(Model model, @ModelAttribute("albumdetails") Albumd
         model.addAttribute("album", album);
         return "viewAlbum";
     }
-    
-    
 
-  @RequestMapping(value = "viewProducts/{albumID}", method = RequestMethod.GET)
+    @RequestMapping(value = "viewProducts/{albumID}", method = RequestMethod.GET)
     public String viewProducts(@PathVariable("albumID") int albumID, ModelMap model) {
         List<Albumdetails> products = productsDAO.getProductDetails(albumID);
         model.addAttribute("products", products);
+        List<com.models.Categories> cate = categoryDAO.findAll();
+        model.addAttribute("cate", cate);
         return "albumsde"; // Tên của trang JSP để hiển thị danh sách sản phẩm
     }
-    
-    
+
 }

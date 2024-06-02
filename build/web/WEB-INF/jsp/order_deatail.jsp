@@ -1,9 +1,8 @@
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page contentType="text/html" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
-
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -33,14 +32,10 @@
 
         <!-- YOUR CUSTOM CSS -->
         <link href="${pageContext.request.contextPath}/css/custom.css" rel="stylesheet">
-
     </head>
-
     <body>
-
         <div id="page">
-
-            <%@include file="header.jsp" %>
+            <%@ include file="header.jsp" %>
             <!-- /header -->
 
             <main class="bg_gray">
@@ -60,53 +55,32 @@
                         <c:when test="${not empty ordererror}">
                             <h1>${ordererror}</h1>
                         </c:when>
-                        <c:otherwise>  
+                        <c:otherwise>
                             <table class="table table-striped cart-list">
                                 <thead>
                                     <tr>
-                                        <th>Product</th>
-                                        <th>deliveryDate</th>
-                                        <th>shipAddress</th>
-                                        <th>status</th>
-                                        <th>deliveryName</th>
-                                        <th>price</th>
-                                        <th>quantity</th>
+                                        <th>Order Date</th>
+                                        <th>Delivery Date</th>
+                                        <th>Status</th>
+                                        <th>Total</th>
+                                        <th>Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <c:forEach var="order" items="${orderDetails}">
                                         <tr>
-                                            <td>
-                                                <div class="thumb_cart">
-                                                    <img src="${pageContext.request.contextPath}/${order.picture}" data-src="${pageContext.request.contextPath}/${order.picture}" class="lazy" alt="Image">
-                                                </div>
-                                                <span class="item_cart">${order.productName}</span>
-                                            </td>
-                                            <td>
-                                                <strong>${order.deliveryDate}</strong>
-                                            </td>
-                                            <td>
-                                                <strong>${order.shipAddress}</strong>
-                                            </td>
-                                            <td>
-                                                <strong>${order.status}</strong>
-                                            </td>
-                                            <td>
-                                                <strong>${order.deliveryName}</strong>
-                                            </td>
-                                            <td>
-                                                <strong>${order.price}</strong>
-                                            </td>
-                                            <td>
-                                                <strong>${order.quantity}</strong>
-                                            </td>
+                                            <td><strong>${order.orderDate}</strong></td>
+                                            <td><strong>${order.deliveryDate}</strong></td>
+                                            <td><strong>${order.status}</strong></td>
+                                            <td><strong>${order.total}</strong></td>
+                                            <td><a href="${pageContext.request.contextPath}/order/detailpro/${order.orderID}.htm">xem chi tiết</a></td>
                                             <td>
                                                 <c:if test="${order.shipAddress == 'HCM'}">
-                                                    <form>
-                                                        <button type="submit">danh gia</button>
+                                                    <form action="${pageContext.request.contextPath}/rate" method="post">
+                                                        <input type="hidden" name="orderId" value="${order.id}" />
+                                                        <button type="submit">Rate</button>
                                                     </form>
                                                 </c:if>
-
                                             </td>
                                         </tr>
                                     </c:forEach>
@@ -114,15 +88,13 @@
                             </table>
                         </c:otherwise>
                     </c:choose>
-
-                    <div class="col-sm-4 text-end">
-                    </div>
+                    <div class="col-sm-4 text-end"></div>
                 </div>
                 <!-- /container -->
             </main>
             <!--/main-->
 
-            <%@include file="footer.jsp" %>
+            <%@ include file="footer.jsp" %>
             <!--/footer-->
         </div>
         <!-- page -->

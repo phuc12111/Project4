@@ -8,7 +8,10 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 
 import com.models.OrderdetailView;
+import com.models.Orders;
+import com.models.PurchasingInvoices;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 
 public class ViewOrderDAOiml implements ViewOrderDAO {
 
@@ -185,6 +188,7 @@ public class ViewOrderDAOiml implements ViewOrderDAO {
                 + "o.status, "
                 + "o.paymentID, "
                 + "o.deliveryID, "
+                + "o.total, "
                 + "o.phone, "
                 + "pi.productID, "
                 + "pi.price, "
@@ -204,6 +208,7 @@ public class ViewOrderDAOiml implements ViewOrderDAO {
                 orderDetail.setStatus(rs.getString("status"));
                 orderDetail.setPaymentID(rs.getInt("paymentID"));
                 orderDetail.setDeliveryID(rs.getInt("deliveryID"));
+                orderDetail.setTotal(rs.getDouble("deliveryID"));
                 orderDetail.setPhone(rs.getString("phone"));
                 orderDetail.setProductID(rs.getInt("productID"));
                 orderDetail.setPrice(rs.getDouble("price"));
@@ -255,4 +260,34 @@ public class ViewOrderDAOiml implements ViewOrderDAO {
         }
 
     }
+    
+    
+     @Override
+    public List<Orders> getAllOrder(String phone) {
+        String sql = "SELECT * FROM orders WHERE phone = ?";
+        return jdbcTemplate.query(sql, new Object[]{phone}, new BeanPropertyRowMapper<>(Orders.class));
+    }
+    
+    
+   @Override
+public List<PurchasingInvoices> getAllPur(int orderID) {
+    String searchSql = "SELECT pi.orderID, pi.productID, pi.price, pi.quantity, p.productName " +
+             "FROM purchasingInvoices pi " +
+             "INNER JOIN products p ON pi.productID = p.productID " +
+             "WHERE pi.orderID = ?";
+
+    return jdbcTemplate.query(searchSql, new Object[]{orderID}, new RowMapper<PurchasingInvoices>() {
+        @Override
+        public PurchasingInvoices mapRow(ResultSet rs, int rowNum) throws SQLException {
+            PurchasingInvoices purchasingInvoice = new PurchasingInvoices();
+            purchasingInvoice.setOrderID(rs.getInt("orderID"));
+            purchasingInvoice.setProductID(rs.getInt("productID"));
+            purchasingInvoice.setProductName(rs.getString("productName"));
+            purchasingInvoice.setPrice(rs.getDouble("price"));
+            purchasingInvoice.setQuantity(rs.getInt("quantity"));
+            return purchasingInvoice;
+        }
+    });
+}
+
 }

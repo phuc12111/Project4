@@ -58,7 +58,7 @@
                                 <a href="${pageContext.request.contextPath}/albums/view/${login.phone}.htm">Albums</a>
                             </li>
                             <li>
-                                <a href="#0">Buy Template</a>
+                                <a href="${pageContext.request.contextPath}/artists/list.htm" >Artist</a>
                             </li>
                         </ul>
                     </div>
@@ -143,7 +143,7 @@
                                             <a href="${pageContext.request.contextPath}/login/login.htm" class="btn_1">Sign In or Sign Up</a>
                                         </c:when>
                                         <c:otherwise>  
-                                            <strong><span>${login.memberName}</span>${login.phone}</strong>
+                                            <strong>${login.phone}</strong>
                                         </c:otherwise>
                                     </c:choose>
                                     

@@ -45,7 +45,8 @@
                             <ul>
                                 <li><a href="#">Home</a></li>
                                 <li><a href="#">Category</a></li>
-                                <li>My order</li>
+                                <li><a href="#">My order</a></li>
+                                <li>My order detail</li>
                             </ul>
                         </div>
                         <h1>My order</h1>
@@ -59,29 +60,28 @@
                             <table class="table table-striped cart-list">
                                 <thead>
                                     <tr>
-                                        <th>Order Date</th>
-                                        <th>Delivery Date</th>
-                                        <th>Status</th>
-                                        <th>Total</th>
-                                        <th>Actions</th>
+                                        <th>productName</th>
+                                        <th>price</th>
+                                        <th>quantity</th>
+                                        
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <c:forEach var="order" items="${orderDetails}">
                                         <tr>
-                                            <td><strong>${order.orderDate}</strong></td>
-                                            <td><strong>${order.deliveryDate}</strong></td>
-                                            <td><strong>${order.status}</strong></td>
-                                            <td><strong>${order.total}</strong></td>
-                                            <td><a href="${pageContext.request.contextPath}/order/detailpro/${order.orderID}.htm">xem chi tiết</a></td>
                                             <td>
-                                                <c:if test="${order.shipAddress == 'HCM'}">
-                                                    <form action="${pageContext.request.contextPath}/rate" method="post">
-                                                        <input type="hidden" name="orderId" value="${order.id}" />
-                                                        <button type="submit">Rate</button>
-                                                    </form>
-                                                </c:if>
+                                                <div class="thumb_cart">
+                                                    <img src="${pageContext.request.contextPath}/${order.picture}" data-src="${pageContext.request.contextPath}/${order.picture}" class="lazy" alt="Image">
+                                                </div>
+                                                <span class="item_cart">${order.productName}</span>
                                             </td>
+                                            <td>
+                                                <strong>${order.price}</strong>
+                                            </td>
+                                            <td>
+                                                <strong>${order.quantity}</strong>
+                                            </td>
+                                            
                                         </tr>
                                     </c:forEach>
                                 </tbody>

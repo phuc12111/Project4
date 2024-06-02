@@ -61,7 +61,7 @@ public class Login {
                 List<com.models.Product> listPro = productDAO.findAll();
                 model.addAttribute("listPro", listPro);
                 model.addAttribute("login", loggedInUser);
-                 List<Albums> albumsList = albumsDAO.selectAlbums(phone);
+                List<Albums> albumsList = albumsDAO.selectAlbums(phone);
                 model.addAttribute("albums", albumsList);
                 List<com.models.Categories> cate = categoryDAO.findAll();
                 model.addAttribute("cate", cate);
@@ -95,9 +95,8 @@ public class Login {
         }
         return "account";
     }
-    
-    
-     @GetMapping("home")
+
+    @GetMapping("home")
     public String home(HttpSession session, ModelMap model) {
         com.models.Login login = (com.models.Login) session.getAttribute("login");
         if (login != null) {
@@ -106,6 +105,8 @@ public class Login {
             model.addAttribute("login", login);
             List<Albums> albumsList = albumsDAO.selectAlbums(login.getPhone());
             model.addAttribute("albums", albumsList);
+            List<com.models.Categories> cate = categoryDAO.findAll();
+            model.addAttribute("cate", cate);
         } else {
             List<com.models.Product> listPro = productDAO.findAll();
             model.addAttribute("listPro", listPro);
